@@ -19,6 +19,6 @@ setup(name='stripsim',
       url='https://github.com/ziotom78/stripsim',
       long_description=read('README.md'),
       py_modules=['src/stripsim'],
-      install_requires=['pyyaml'],
+      install_requires=['healpy', 'pyyaml'],
       ext_modules=[wrapper]
 )
