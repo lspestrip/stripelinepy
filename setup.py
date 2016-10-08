@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from setuptools import setup
-from numpy.distutils.core import Extension
+import os
+from numpy.distutils.core import setup, Extension
 
 # Utility function to read the README file.
 def read(fname):
