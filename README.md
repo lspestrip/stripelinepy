@@ -1,5 +1,5 @@
-# stripsim
-A simulation pipeline for the Strip instrument.
+# STRIPeline
+A simulation pipeline for the STRIP instrument.
 
 # Requirements
 
