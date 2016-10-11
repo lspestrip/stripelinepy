@@ -3,7 +3,7 @@ A simulation pipeline for the STRIP instrument.
 
 # Requirements
 
-You'll need Python3, a Fortran 2003 compiler, and the following Python
+You'll need Python 3.x, a Fortran 2003 compiler, and the following Python
 libraries:
 - Healpy
 - PyYAML
@@ -21,8 +21,7 @@ command line. (If it does not start, check your `PATH` settings.)
 If you're a developer, you can build and run the code within the
 repository folder using the following commands:
 
-    python setup.py build_ext --inplace
-    python src/stripsim.py
+    pip install -e .
 
 # License
 The code is released under a MIT license.
