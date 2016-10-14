@@ -24,7 +24,7 @@ class TestFlatRNG(ut.TestCase):
                                    msg='Reference #{0} does not match'.format(idx))
 
 
-def TestGaussRNG(ut.TestCase):
+class TestGaussRNG(ut.TestCase):
     def test_gaussW(self):
         '''Check that the first numbers returned by the Gaussian generator
         match the ones produced by the C++ version'''
