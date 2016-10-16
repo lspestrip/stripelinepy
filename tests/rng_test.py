@@ -42,5 +42,23 @@ class TestNormalRNG(ut.TestCase):
                                    msg='Reference #{0} does not match'.format(idx))
 
 
+class TestOof2RNG(ut.TestCase):
+    def test_identity(self):
+        'Check that the generator\'s result match the C++ implementation'
+
+        rng = ng.Oof2RNG(fmin=1.15e-5, fknee=0.05, fsample=1.0)
+        for idx, reference in enumerate([2.0886370365, -0.6074844495,
+                                         -0.3464683356, 0.8936789422,
+                                         0.4167745672, -1.6416294545,
+                                         0.1259486772, -0.1427304943,
+                                         -0.6395859847, -0.7526144784,
+                                         -2.3116079175, -2.3217436788,
+                                         -0.9229344940, -2.4367338428,
+                                         -2.2756948201, -0.5210397131,
+                                         -1.4655131788, -1.6547241628,
+                                         -0.9190954646, -1.0864977062]):
+            self.assertAlmostEqual(rng.next(), reference,
+                                   msg='Reference #{0} does not match'.format(idx))
+
 if __name__ == '__main__':
     ut.main()

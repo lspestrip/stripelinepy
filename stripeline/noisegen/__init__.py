@@ -26,3 +26,16 @@ class NormalRNG:
 
     def fill_vector(self, array):
         rng.fill_vector_normal(self.state, self.empty, self.gset, array)
+
+
+class Oof2RNG:
+    def __init__(self, fmin, fknee, fsample,
+                 x_init=0, y_init=0, z_init=0, w_init=0):
+        self.flat_state = rng.init_rng(x_init, y_init, z_init, w_init)
+        self.empty = np.ones(1, dtype='int8')
+        self.gset = np.zeros(1, dtype='float64')
+        self.oof2_state = rng.init_oof2(fmin, fknee, fsample)
+
+    def next(self):
+        return rng.rand_oof2(self.flat_state, self.empty,
+                             self.gset, self.oof2_state)

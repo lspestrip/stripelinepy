@@ -50,5 +50,27 @@ interface
         double precision, dimension(num), intent(inout) :: array
         integer intent(hide), depend(array) :: num
     end subroutine fill_vector_normal
+
+    subroutine init_oof2(fmin, fknee, fsample, oof2_state)
+        intent(c) init_oof2
+        intent(c)
+
+        double precision, intent(in) :: fmin
+        double precision, intent(in) :: fknee
+        double precision, intent(in) :: fsample
+        double precision, dimension(5), intent(out) :: oof2_state
+    end subroutine init_oof2
+
+    function rand_oof2(flat_state, empty, gset, oof2_state)
+        intent(c) rand_oof2
+        intent(c)
+
+        integer(kind=4), dimension(4), intent(inout) :: flat_state
+        integer(kind=1), dimension(1), intent(inout) :: empty
+        double precision, dimension(1), intent(inout) :: gset
+        double precision, dimension(5), intent(inout) :: oof2_state
+
+        double precision :: rand_oof2
+    end function rand_oof2
 end interface
 end python module rng

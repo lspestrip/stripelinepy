@@ -24,6 +24,9 @@
  * Fortran, by the way, as standard Fortran does not allow unsigned
  * integer types.)
  *
+ * The "oof2" (1/f^2) RNG has an internal state of 5 double numbers.
+ * It uses Plaszczynski's algorith.
+ *
  * The code has been written with the aim of being wrapped
  * automatically using "f2py" (which, despite its name, is able to
  * wrap C functions too).
@@ -138,4 +141,37 @@ void fill_vector_normal(int32_t *state, int8_t *empty, double *gset,
   for (int i = 0; i < num; ++i) {
     array[i] = rand_normal(state, empty, gset);
   }
+}
+
+/******************************************************************************/
+
+#define OOF2_C0(state) (state[0])
+#define OOF2_C1(state) (state[1])
+#define OOF2_D0(state) (state[2])
+#define OOF2_X1(state) (state[3])
+#define OOF2_Y1(state) (state[4])
+
+void init_oof2(double fmin, double fknee, double fsample, double *oof2_state) {
+  double w0 = M_PI * fmin / fsample;
+  double w1 = M_PI * fknee / fsample;
+
+  OOF2_C0(oof2_state) = (1.0 + w1) / (1.0 + w0);
+  OOF2_C1(oof2_state) = -(1.0 - w1) / (1.0 + w0);
+  OOF2_D0(oof2_state) = (1.0 - w0) / (1.0 + w0);
+  OOF2_X1(oof2_state) = 0;
+  OOF2_Y1(oof2_state) = 0;
+}
+
+/******************************************************************************/
+
+double rand_oof2(int32_t *flat_state, int8_t *empty, double *gset,
+                 double *oof2_state) {
+  double x2 = rand_normal(flat_state, empty, gset);
+  double y2 = OOF2_C0(oof2_state) * x2 +
+              OOF2_C1(oof2_state) * OOF2_X1(oof2_state) +
+              OOF2_D0(oof2_state) * OOF2_Y1(oof2_state);
+  OOF2_X1(oof2_state) = x2;
+  OOF2_Y1(oof2_state) = y2;
+
+  return y2;
 }
