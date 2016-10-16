@@ -1,0 +1,54 @@
+python module rng
+interface
+    subroutine init_rng(x_start, y_start, z_start, w_start, state)
+        intent(c) init_rng
+        intent(c)
+
+        integer(kind=4), intent(in) :: x_start
+        integer(kind=4), intent(in) :: y_start
+        integer(kind=4), intent(in) :: z_start
+        integer(kind=4), intent(in) :: w_start
+        integer(kind=4), intent(out), dimension(4) :: state
+    end subroutine init_rng
+
+    function rand_uniform(state)
+        intent(c) rand_uniform
+        intent(c)
+
+        integer(kind=4), intent(inout), dimension(4) :: state
+
+        double precision :: rand_uniform
+    end function rand_uniform
+
+    subroutine fill_vector_uniform(state, array, num)
+        intent(c) fill_vector_uniform
+        intent(c)
+
+        integer(kind=4), intent(inout), dimension(4) :: state
+        double precision, dimension(num), intent(inout) :: array
+        integer intent(hide), depend(array) :: num
+    end subroutine fill_vector_uniform
+
+    function rand_normal(state, empty, gset)
+        intent(c) rand_normal
+        intent(c)
+
+        integer(kind=4), intent(inout), dimension(4) :: state
+        integer(kind=1), dimension(1), intent(inout) :: empty
+        double precision, dimension(1), intent(inout) :: gset
+
+        double precision :: rand_normal
+    end function rand_normal
+
+    subroutine fill_vector_normal(state, empty, gset, array, num)
+        intent(c) fill_vector_normal
+        intent(c)
+
+        integer(kind=4), intent(inout), dimension(4) :: state
+        integer(kind=1), dimension(1), intent(inout) :: empty
+        double precision, dimension(1), intent(inout) :: gset
+        double precision, dimension(num), intent(inout) :: array
+        integer intent(hide), depend(array) :: num
+    end subroutine fill_vector_normal
+end interface
+end python module rng

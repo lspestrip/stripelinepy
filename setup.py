@@ -2,7 +2,6 @@
 
 from numpy.distutils.core import setup, Extension
 from numpy.distutils.misc_util import Configuration
-from Cython.Build import cythonize
 
 NAME = 'stripeline'
 VERSION = '0.1'
@@ -19,8 +18,10 @@ def read(fname):
 def configuration(parent_package='', top_path=None):
     extensions = [Extension('fortran_routines',
                             sources=['stripeline/fortran_routines.f90'],
-                            extra_f90_compile_args=[FORTRAN2003_FLAG])]
-    extensions += cythonize('stripeline/noisegen/flatrng.pyx')
+                            extra_f90_compile_args=[FORTRAN2003_FLAG]),
+                  Extension('rng',
+                            sources=['stripeline/noisegen/rng.pyf',
+                                     'stripeline/noisegen/rng.c'])]
 
     config = Configuration(NAME, parent_package, top_path,
                            version=VERSION,
