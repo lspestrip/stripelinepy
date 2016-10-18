@@ -5,9 +5,9 @@ A simulation pipeline for the STRIP instrument.
 
 You'll need Python 3.x, a Fortran 2003 compiler, and the following Python
 libraries:
+- Numpy
 - Healpy
 - PyYAML
-- Cython
 
 # Install
 
