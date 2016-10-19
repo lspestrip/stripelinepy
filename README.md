@@ -1,13 +1,18 @@
 # STRIPeline
+
 A simulation pipeline for the STRIP instrument.
+
 
 # Requirements
 
 You'll need Python 3.x, a Fortran 2003 compiler, and the following Python
 libraries:
 - Numpy
+- Astropy
 - Healpy
 - PyYAML
+- Click
+
 
 # Install
 
@@ -28,5 +33,13 @@ You can now run the tests under the directory `tests`, like this:
 
     python tests/flatrng_test.py
 
+
+# Documentation
+
+The documentation is hosted on `ReadTheDocs
+<http://stripeline.readthedocs.io>`_.
+
+
 # License
+
 The code is released under a MIT license.
