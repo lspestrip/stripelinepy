@@ -2,6 +2,8 @@
 
 A simulation pipeline for the STRIP instrument.
 
+https://travis-ci.org/ziotom78/stripeline.svg?branch=master
+
 
 # Requirements
 
