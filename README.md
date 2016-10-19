@@ -38,8 +38,7 @@ You can now run the tests under the directory `tests`, like this:
 
 # Documentation
 
-The documentation is hosted on `ReadTheDocs
-<http://stripeline.readthedocs.io>`_.
+The documentation is hosted on [ReadTheDocs](http://stripeline.readthedocs.io).
 
 
 # License
