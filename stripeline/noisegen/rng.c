@@ -36,12 +36,14 @@
 #include <math.h>
 #include <stdint.h>
 
+const double PI = 3.14159265358979323846;
 const double scale_factor = 1.0 / (1.0 + (double)0xFFFFFFFF);
 
 /******************************************************************************/
 
 static void twiddle(uint32_t *v) {
-  for (int i = 0; i < 9; ++i) {
+  int i;
+  for (i = 0; i < 9; ++i) {
     *v ^= *v << 13;
     *v ^= *v >> 17;
     *v ^= *v << 5;
@@ -75,6 +77,7 @@ static uint32_t int_rand_uni(int32_t *state) {
 void init_rng(int32_t x_start, int32_t y_start, int32_t z_start,
               int32_t w_start, int32_t *state) {
   uint32_t *ustate = (uint32_t *)state;
+  int i;
 
   state[0] = x_start != 0 ? x_start : 123456789;
   state[1] = y_start != 0 ? y_start : 362436069;
@@ -89,7 +92,7 @@ void init_rng(int32_t x_start, int32_t y_start, int32_t z_start,
   twiddle(&ustate[3]);
 
   /* Burn in the RNG */
-  for (int i = 0; i < 16; ++i) {
+  for (i = 0; i < 16; ++i) {
     NEXT_STATE(ustate);
   }
 }
@@ -106,7 +109,9 @@ double rand_uniform(int32_t *state) {
 /* Fill a vector with random uniform numbers */
 void fill_vector_uniform(int32_t *state, double *array, int num) {
   uint32_t *ustate = (uint32_t *)state;
-  for (int i = 0; i < num; ++i) {
+  int i;
+
+  for (i = 0; i < num; ++i) {
     NEXT_STATE(ustate);
     array[i] = ustate[3] * scale_factor;
   }
@@ -138,7 +143,8 @@ double rand_normal(int32_t *state, int8_t *empty, double *gset) {
 
 void fill_vector_normal(int32_t *state, int8_t *empty, double *gset,
                         double *array, int num) {
-  for (int i = 0; i < num; ++i) {
+  int i;
+  for (i = 0; i < num; ++i) {
     array[i] = rand_normal(state, empty, gset);
   }
 }
@@ -152,8 +158,8 @@ void fill_vector_normal(int32_t *state, int8_t *empty, double *gset,
 #define OOF2_Y1(state) (state[4])
 
 void init_oof2(double fmin, double fknee, double fsample, double *oof2_state) {
-  double w0 = M_PI * fmin / fsample;
-  double w1 = M_PI * fknee / fsample;
+  double w0 = PI * fmin / fsample;
+  double w1 = PI * fknee / fsample;
 
   OOF2_C0(oof2_state) = (1.0 + w1) / (1.0 + w0);
   OOF2_C1(oof2_state) = -(1.0 - w1) / (1.0 + w0);
