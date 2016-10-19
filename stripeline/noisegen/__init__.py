@@ -10,22 +10,24 @@ results when the same seeds are digested.
 
 Here is a list of the classes implemented by this module:
 
-- FlatRNG: uniform distribution in the range [0, 1[
+- :class:`FlatRNG`: uniform distribution in the range :math:`[0, 1[`.
 
-- NormalRNG: Gaussian distribution with mean=0, sigma=1
+- :class:`NormalRNG`: Gaussian distribution with mean :math:`\mu=0`
+  and standard deviation :math:`\sigma=1`.
 
-- Oof2RNG: 1/f^2 distribution with custom knee frequency, sampling
-  frequency and minimum frequency.
+- :class:`Oof2RNG`: :math:`1/f^2` distribution with custom knee
+  frequency, sampling frequency and minimum frequency.
 
-All the classes implement a `next` method and a `fill_vector` method
-(the latter is missing from the Oof2RNG class). The `fill_vector`
-methods have been optimized for handling large datasets.
+All the classes implement a ``next`` method and a ``fill_vector``
+method (the latter is missing from the :class:`Oof2RNG` class). The
+``fill_vector`` methods have been optimized for handling large
+datasets.
 
 Example
 -------
 
 Create an array of 100 random number in the range [0, 1[ with an
-uniform distribution:
+uniform distribution::
 
    rng = FlatRNG()
    vec = numpy.empty(100)
@@ -36,16 +38,25 @@ uniform distribution:
 import numpy as np
 import rng
 
+
 class FlatRNG:
     'Random number generator with uniform distribution in the range [0, 1['
 
     def __init__(self, x_init=0, y_init=0, z_init=0, w_init=0):
+        '''Initialize the random number generator.
+
+        The four parameters ``x_init``, ``y_init``, ``z_init``, and
+        ``w_init`` are the four 32-bit seeds used by the generator.
+        '''
+
         self.state = rng.init_rng(x_init, y_init, z_init, w_init)
 
     def next(self):
+        'Return a new pseudorandom number'
         return rng.rand_uniform(self.state)
 
     def fill_vector(self, array):
+        'Fill the ``array`` vector with a sequence of pseudorandom numbers'
         rng.fill_vector_uniform(self.state, array)
 
 
@@ -61,15 +72,18 @@ class NormalRNG:
         num = mean + rng.next() * sigma
 
     '''
+
     def __init__(self, x_init=0, y_init=0, z_init=0, w_init=0):
         self.state = rng.init_rng(x_init, y_init, z_init, w_init)
         self.empty = np.ones(1, dtype='int8')
         self.gset = np.zeros(1, dtype='float64')
 
     def next(self):
+        'Return a new pseudorandom number'
         return rng.rand_normal(self.state, self.empty, self.gset)
 
     def fill_vector(self, array):
+        'Fill the ``array`` vector with a sequence of pseudorandom numbers'
         rng.fill_vector_normal(self.state, self.empty, self.gset, array)
 
 
@@ -78,6 +92,7 @@ class Oof2RNG:
 
     The random numbers have zero mean.
     '''
+
     def __init__(self, fmin, fknee, fsample,
                  x_init=0, y_init=0, z_init=0, w_init=0):
         self.flat_state = rng.init_rng(x_init, y_init, z_init, w_init)
@@ -86,5 +101,6 @@ class Oof2RNG:
         self.oof2_state = rng.init_oof2(fmin, fknee, fsample)
 
     def next(self):
+        'Return a new pseudorandom number'
         return rng.rand_oof2(self.flat_state, self.empty,
                              self.gset, self.oof2_state)
