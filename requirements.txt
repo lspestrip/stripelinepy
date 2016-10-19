@@ -1,0 +1,5 @@
+numpy
+healpy
+astropy
+pyyaml
+click
