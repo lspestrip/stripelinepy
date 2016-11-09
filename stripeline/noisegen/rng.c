@@ -181,3 +181,13 @@ double rand_oof2(int32_t *flat_state, int8_t *empty, double *gset,
 
   return y2;
 }
+
+/******************************************************************************/
+
+void fill_vector_oof2(int32_t *flat_state, int8_t *empty, double *gset,
+                      double *oof2_state, double *array, int num) {
+  int i;
+  for (i = 0; i < num; ++i) {
+    array[i] = rand_oof2(flat_state, empty, gset, oof2_state);
+  }
+}

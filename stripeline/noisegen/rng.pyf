@@ -72,5 +72,18 @@ interface
 
         double precision :: rand_oof2
     end function rand_oof2
+
+    subroutine fill_vector_oof2(state, empty, gset, oof2_state, array, num)
+        intent(c) fill_vector_normal
+        intent(c)
+
+        integer(kind=4), intent(inout), dimension(4) :: state
+        integer(kind=1), dimension(1), intent(inout) :: empty
+        double precision, dimension(1), intent(inout) :: gset
+        double precision, dimension(5), intent(out) :: oof2_state
+        double precision, dimension(num), intent(inout) :: array
+        integer intent(hide), depend(array) :: num
+    end subroutine fill_vector_oof2
+
 end interface
 end python module rng
