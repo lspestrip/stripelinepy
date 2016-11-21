@@ -60,11 +60,11 @@ class TestOperations(ut.TestCase):
     def test_from_axisangle(self):
         'Check that quaternions are built from axis and angles correctly'
 
-        axes = np.array([[1.0, 2.0, 3.0],
-                         [4.0, 5.0, 6.0]])
+        axes = np.array([[0.07142857, 0.14285714, 0.21428571],
+                         [0.05194805, 0.06493506, 0.07792208]])
         angles = np.array([0.1, -0.2])
-        expected = np.array([[ 0.01335749,  0.02671499,  0.04007248, 0.99875026039496628],
-                             [-0.04550829, -0.05688537, -0.06826244, 0.99500416527802582]])
+        expected = np.array([[ 0.00356994,  0.00713988,  0.01070982, 0.99875026,],
+                             [-0.00518615, -0.00648269, -0.00777923, 0.99500417]])
         self.assertTrue(np.allclose(q.qfromaxisangle(axes, angles),
                                     expected))
 
@@ -80,3 +80,32 @@ class TestOperations(ut.TestCase):
                                     2.7388768120091318])
         self.assertTrue(np.allclose(axes, expected_axes))
         self.assertTrue(np.allclose(angles, expected_angles))
+
+    def test_inverse(self):
+        '''Check that the inversion of rot. quaternion is correct'''
+
+        quat = np.array([[ 0.00356994,  0.00713988,  0.01070982, 0.99875026,], 
+                         [-0.00518615, -0.00648269, -0.00777923, 0.99500417]])
+        expected = np.array([[-0.00356994, -0.00713988, -0.01070982, 0.99875026,],
+                             [ 0.00518615,  0.00648269,  0.00777923, 0.99500417]])
+        self.assertTrue(np.allclose(q.qinvrot(quat), expected))
+
+    def test_rotations(self):
+        '''Check that the rotation of 3D vectors work as expected'''
+
+        vec = np.array([[1, 0, 0],
+                        [0, 1, 0],
+                        [0, 0, 1],
+                        [0.45584211, 0.56980286, 0.68376361]])
+        axes = np.array([[0, 1, 0],
+                         [1, 0, 0],
+                         [0, 1, 0],
+                         [0.71701072,  0.21244762, -0.66389881]])
+        angles = np.array([0.5, 0.5, 0.5, 0.3]) * np.pi
+        quat = q.qfromaxisangle(axes, angles)
+
+        expected = np.array([[ 0, 0,  1],
+                             [ 0, 0, -1],
+                             [-1, 0,  0],
+                             [-0.157416951, 0.975860304, 0.151382202]])
+        self.assertTrue(np.allclose(q.qrotate(vec, quat), expected))
