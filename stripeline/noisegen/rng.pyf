@@ -74,7 +74,7 @@ interface
     end function rand_oof2
 
     subroutine fill_vector_oof2(state, empty, gset, oof2_state, array, num)
-        intent(c) fill_vector_normal
+        intent(c) fill_vector_oof2
         intent(c)
 
         integer(kind=4), intent(inout), dimension(4) :: state
