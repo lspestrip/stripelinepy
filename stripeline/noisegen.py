@@ -36,7 +36,7 @@ uniform distribution::
 '''
 
 import numpy as np
-import rng
+import stripeline.rng as rng
 
 
 class FlatRNG:

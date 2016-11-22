@@ -19,12 +19,12 @@ def configuration(parent_package='', top_path=None):
     extensions = [Extension('fortran_routines',
                             sources=['stripeline/fortran_routines.f90'],
                             extra_f90_compile_args=[FORTRAN2003_FLAG]),
-                  Extension('quaternions',
-                            sources=['stripeline/quaternions/_quaternions.f90'],
+                  Extension('stripeline.quaternions',
+                            sources=['stripeline/_quaternions.f90'],
                             extra_f90_compile_args=[FORTRAN2003_FLAG]),
-                  Extension('rng',
-                            sources=['stripeline/noisegen/rng.pyf',
-                                     'stripeline/noisegen/rng.c'])]
+                  Extension('stripeline.rng',
+                            sources=['stripeline/rng.pyf',
+                                     'stripeline/rng.c'])]
 
     config = Configuration(NAME, parent_package, top_path,
                            version=VERSION,

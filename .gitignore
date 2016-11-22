@@ -6,6 +6,7 @@ __pycache__/
 
 # C extensions
 *.so
+stripeline/rngmodule.c
 
 # Distribution / packaging
 .Python
