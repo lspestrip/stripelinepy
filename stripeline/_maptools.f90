@@ -3,12 +3,13 @@
 ! map of the polarization angles in the array "angle". Note that
 ! "pixidx" must be a *zero-based* array! The routine internally does the
 ! conversion to Fortran indexing (which is 1-based).
-subroutine update_condmatr(pixidx, angle, m)
+subroutine update_condmatr(numpix, pixidx, angle, m)
     implicit none
 
+    integer(kind=8), intent(in) :: numpix
     integer(kind=4), dimension(:), intent(in) :: pixidx
     real(kind=8), dimension(size(pixidx)), intent(in) :: angle
-    real(kind=8), dimension(size(pixidx), 9), intent(inout) :: m
+    real(kind=8), dimension(numpix, 9), intent(inout) :: m
 
     real(kind=8) :: cos2angle
     real(kind=8) :: sin2angle
@@ -20,8 +21,8 @@ subroutine update_condmatr(pixidx, angle, m)
         ! Python indexing to Fortran indexing
         pixidx1 = pixidx(i) + 1
 
-        cos2angle = cos(angle(pixidx1))
-        sin2angle = sin(angle(pixidx1))
+        cos2angle = cos(2.0 * angle(i))
+        sin2angle = sin(2.0 * angle(i))
         sincos2angle = sin2angle * cos2angle
 
         m(pixidx1, 1) = m(pixidx1, 1) + 1
