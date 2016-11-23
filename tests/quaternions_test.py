@@ -92,25 +92,39 @@ class TestOperations(ut.TestCase):
                              [0.00518615,  0.00648269,  0.00777923, 0.99500417]])
         self.assertTrue(np.allclose(q.qinvrot(quat), expected))
 
-    def test_rotations(self):
-        '''Check that the rotation of 3D vectors work as expected'''
+    def test_simple_rotations(self):
+        '''Check that the rotation of basis vectors work as expected'''
 
         vec = np.array([[1, 0, 0],
                         [0, 1, 0],
-                        [0, 0, 1],
-                        [0.45584211, 0.56980286, 0.68376361]])
+                        [0, 0, 1]])
         axes = np.array([[0, 1, 0],
                          [1, 0, 0],
-                         [0, 1, 0],
-                         [0.71701072,  0.21244762, -0.66389881]])
-        angles = np.array([0.5, 0.5, 0.5, 0.3]) * np.pi
+                         [0, 1, 0]])
+        angles = np.array([0.5, 0.5, 0.5]) * np.pi
         quat = q.qfromaxisangle(axes, angles)
 
         expected = np.array([[0, 0, -1],
                              [0, 0,  1],
-                             [1, 0,  0],
-                             [6.89713469e-01, -3.07077022e-01, 6.55743116e-01]])
+                             [1, 0,  0]])
         print(q.qrotate(vec, quat))
+        self.assertTrue(np.allclose(q.qrotate(vec, quat), expected))
+
+    def test_arbitrary_rotations(self):
+        quat = np.array([[-5.12855185e-01, 0, 0, 8.58475136e-01],
+                         [-5.12855184e-01, -1.86479407e-05,
+                             3.12150368e-05, 8.58475136e-01],
+                         [-5.12855183e-01, -3.72958815e-05,
+                             6.24300736e-05, 8.58475134e-01]])
+
+        vec = np.array([[0., 0., 0.],
+                        [0., 0.04997917, -0.04997917],
+                        [1., 0.99875026,  0.99875026]])
+
+        expected = np.array([[0., 0., 0.],
+                             [1.47777878e-06, -2.03209169e-02, -6.76970831e-02],
+                             [9.99803230e-01,  1.35295862e+00, -4.06079600e-01]])
+
         self.assertTrue(np.allclose(q.qrotate(vec, quat), expected))
 
     def test_rotation_composition(self):
