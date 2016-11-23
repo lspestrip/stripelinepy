@@ -5,12 +5,15 @@
 
 import logging as log
 import os.path
-from typing import Any
+from collections import namedtuple
+from typing import Any, List
 import click
 import healpy
 import numpy as np
 from astropy.io import fits
+
 import stripeline.quaternions as q
+import stripeline.timetools as timetools
 
 
 def time_to_rot_angle(time_vec: Any, rpm: float) -> Any:
@@ -18,7 +21,7 @@ def time_to_rot_angle(time_vec: Any, rpm: float) -> Any:
 
     RPM is Rotation Per Minute, of course!'''
 
-    assert (rpm >= 0.0)
+    assert rpm >= 0.0
 
     if rpm == 0.0:
         return np.zeros_like(time_vec)
@@ -26,7 +29,7 @@ def time_to_rot_angle(time_vec: Any, rpm: float) -> Any:
         return 2 * np.pi * time_vec * (rpm / 60.0)
 
 
-def save_tod(time, theta, phi, psi, file_name):
+def save_tod(time, theta, phi, psi, file_name: str):
     ''' Save a TOD into a FITS file'''
     cols = [
         fits.Column(name=name, format=fmt, unit=unit, array=arr)
@@ -95,18 +98,20 @@ def main(output_path, wheel1_rpm, wheel3_rpm, wheel1_angle0, wheel2_angle0,
         level=log.INFO, format='%(asctime)s %(levelname)s] %(message)s')
 
     num_of_samples = int(time_length * sampfreq)
-    delta_time = time_length / num_of_chunks
-
     log.info('%d samples will be processed in %d steps', num_of_samples,
              num_of_chunks)
+
     x_vec = np.array([1, 0, 0])
     z_vec = np.array([0, 0, 1])
-    for chunk_idx in range(num_of_chunks):
-        # Determine the time of each sample in this chunk
-        cur_time = chunk_idx * delta_time
-        chunk_time0 = np.ceil(cur_time * sampfreq) / sampfreq - cur_time
-        time_vec = cur_time + chunk_time0 + np.arange(int(delta_time *
-                                                          sampfreq)) / sampfreq
+
+    chunks = timetools.split_time_range(time_length=time_length,
+                                        num_of_chunks=num_of_chunks,
+                                        sampfreq=sampfreq,
+                                        time0=0.0)
+    for chunk_idx, cur_chunk in enumerate(chunks):
+        start_time, samples_per_chunk = cur_chunk
+
+        time_vec = start_time + np.arange(samples_per_chunk) / sampfreq
 
         # Determine the angle of each wheel (the second wheel is the simplest)
         wheel1_angle = np.deg2rad(wheel1_angle0) + time_to_rot_angle(
