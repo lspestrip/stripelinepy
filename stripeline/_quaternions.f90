@@ -134,25 +134,29 @@ subroutine qrotate(vec, quat, output)
   !     output = inv(quat) * (vec * quat)
   ! We use "tmpq" to store the value of "vec * quat"
   real(kind=8), dimension(4) :: tmpq
+  real(kind=8), dimension(4) :: invq
   integer :: i
 
   do i = 1, size(vec, 1)
+     invq(1:3) = -quat(i, 1:3)
+     invq(4) = quat(i, 4)
+
      ! This code is like "qmul", but it assumes that "vec" is an array of
      ! 3-element vector instead of an array of 4-element quaternions: so a few
      ! terms can be safely dropped (vec(i, 4) is always zero!)
-     tmpq(1) =  vec(i, 1) * quat(i, 4) + vec(i, 2) * quat(i, 3) - vec(i, 3) * quat(i, 2)
-     tmpq(2) =  vec(i, 2) * quat(i, 4) + vec(i, 3) * quat(i, 1) - vec(i, 1) * quat(i, 3)
-     tmpq(3) =  vec(i, 3) * quat(i, 4) + vec(i, 1) * quat(i, 2) - vec(i, 2) * quat(i, 1)
-     tmpq(4) = -vec(i, 1) * quat(i, 1) - vec(i, 2) * quat(i, 2) - vec(i, 3) * quat(i, 3)
+     tmpq(1) =  vec(i, 1) * invq(4) + vec(i, 2) * invq(3) - vec(i, 3) * invq(2)
+     tmpq(2) =  vec(i, 2) * invq(4) + vec(i, 3) * invq(1) - vec(i, 1) * invq(3)
+     tmpq(3) =  vec(i, 3) * invq(4) + vec(i, 1) * invq(2) - vec(i, 2) * invq(1)
+     tmpq(4) = -vec(i, 1) * invq(1) - vec(i, 2) * invq(2) - vec(i, 3) * invq(3)
 
      ! This code is again like "qmul", but we drop the last term, as we are
      ! only interested in the "vector" part of the computation (i.e., the first
      ! three elements of the "output(i, :)" quaternion)
-     output(i, 1) = -quat(i, 1) * tmpq(4) + quat(i, 4) * tmpq(1) &
-        - quat(i, 2) * tmpq(3) + quat(i, 3) * tmpq(2)
-     output(i, 2) = -quat(i, 2) * tmpq(4) + quat(i, 4) * tmpq(2) &
-        - quat(i, 3) * tmpq(1) + quat(i, 1) * tmpq(3)
-     output(i, 3) = -quat(i, 3) * tmpq(4) + quat(i, 4) * tmpq(3) &
-        - quat(i, 1) * tmpq(2) + quat(i, 2) * tmpq(1)
+     output(i, 1) = quat(i, 1) * tmpq(4) + quat(i, 4) * tmpq(1) &
+         + quat(i, 2) * tmpq(3) - quat(i, 3) * tmpq(2)
+     output(i, 2) = quat(i, 2) * tmpq(4) + quat(i, 4) * tmpq(2) &
+         + quat(i, 3) * tmpq(1) - quat(i, 1) * tmpq(3)
+     output(i, 3) = quat(i, 3) * tmpq(4) + quat(i, 4) * tmpq(3) &
+         + quat(i, 1) * tmpq(2) - quat(i, 2) * tmpq(1)
   enddo
 end subroutine qrotate
