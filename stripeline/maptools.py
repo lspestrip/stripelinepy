@@ -15,17 +15,17 @@ class ConditionMatrix:
 
     This class computes the inverse condition number of the pixels in a map,
     given one or more streams of samples taken from TODs. Condition numbers
-    are useful to quantify how well map-makers are able to derive the I/Q/U 
-    components of the sky signal. This class computes the *inverse* condition 
+    are useful to quantify how well map-makers are able to derive the I/Q/U
+    components of the sky signal. This class computes the *inverse* condition
     numbers, which is the most widely used approach: condition numbers range
     from 1 (best case, perfect I/Q/U reconstruction) to infinity (worst case),
     while inverse condition numbers range from 0 (no possibility to disentangle
     I/Q/U) to 1 (best case).
 
     A typical usage of this class is to create an object and repeatedly call
-    the :method:`ConditionMatrix.update` method with part of all the samples
+    the :func:`ConditionMatrix.update` method with part of all the samples
     in the TOD. When all the TODs have been processed, the function
-    :method:`ConditionMatrix.to_map` can be used to trigger the computation
+    :func:`ConditionMatrix.to_map` can be used to trigger the computation
     of the condition numbers and produce a map.
     '''
 
@@ -33,7 +33,7 @@ class ConditionMatrix:
         '''Create a ConditionMatrix object
 
         The `numpix` parameter specifies how many pixels the map should contain.
-        In the case of Healpix maps, this should be the result of a call 
+        In the case of Healpix maps, this should be the result of a call
         to healpy.nside2npix.
         '''
         self.numpix = numpix

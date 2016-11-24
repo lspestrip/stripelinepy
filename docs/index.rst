@@ -13,6 +13,7 @@ Contents:
 
    math_conventions
    noisegen
+   maptools
 
 
 
