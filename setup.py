@@ -22,7 +22,7 @@ def configuration(parent_package='', top_path=None):
                   Extension('stripeline.quaternions',
                             sources=['stripeline/_quaternions.f90'],
                             extra_f90_compile_args=[FORTRAN2003_FLAG]),
-                  Extension('stripeline.maptools',
+                  Extension('stripeline._maptools',
                             sources=['stripeline/_maptools.f90'],
                             extra_f90_compile_args=[FORTRAN2003_FLAG]),
                   Extension('stripeline.rng',
