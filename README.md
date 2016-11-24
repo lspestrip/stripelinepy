@@ -31,9 +31,8 @@ This will install the script `stripsim`, which can be run from the
 command line. (If it does not start, check your `PATH` settings.)
 
 If you're a developer, you can build and run the code within the
-repository folder and install it using the following commands:
+repository folder and install it using the following command:
 
-    python setup.py build_ext
     pip install -e .
 
 You can now run each of the tests under the directory `tests`, like
@@ -44,7 +43,7 @@ this:
 You can use [pytest](http://docs.pytest.org/en/latest/) to discover
 and run all the tests automatically:
 
-    py.test
+    pytest
 
 (If you are a Nose user, you can use `nosetests` as well.)
 
