@@ -7,7 +7,6 @@ import logging as log
 import io
 import os.path
 import sys
-from collections import namedtuple
 from typing import Any
 import click
 import healpy
@@ -19,29 +18,92 @@ import stripeline.quaternions as q
 import stripeline.timetools as timetools
 
 
-ScanningStrategy = namedtuple('ScanningStrategy',
-                              ['wheel1_rpm',
-                               'wheel3_rpm',
-                               'wheel1_angle0_deg',
-                               'wheel2_angle0_deg',
-                               'wheel3_angle0_deg',
-                               'latitude_deg',
-                               'overall_time_s',
-                               'sampling_frequency_hz'])
+class ScanningStrategy:
+    '''Parameters of a sky scanning strategy.abs
 
+    This class holds together a number of information needed to define a 
+    strategy to scan the sky. It works like a named tuple, but it allows
+    members to be changed after the object has been created.abs
 
-def save_scanning_strategy(strategy: ScanningStrategy, stream):
-    '''Write a YAML representation of `strategy` into the stream.'''
+    The class implements YAML serialization.'''
 
-    yaml.dump(strategy._asdict(),
-              stream=stream,
-              explicit_start=True,
-              explicit_end=True)
+    def __init__(self,
+                 wheel1_rpm=0.0,
+                 wheel3_rpm=0.0,
+                 wheel1_angle0_deg=0.0,
+                 wheel2_angle0_deg=0.0,
+                 wheel3_angle0_deg=0.0,
+                 latitude_deg=0.0,
+                 overall_time_s=0.0,
+                 sampling_frequency_hz=0.0):
+        self.wheel1_rpm = wheel1_rpm
+        self.wheel3_rpm = wheel3_rpm
+        self.wheel1_angle0_deg = wheel1_angle0_deg
+        self.wheel2_angle0_deg = wheel2_angle0_deg
+        self.wheel3_angle0_deg = wheel3_angle0_deg
+        self.latitude_deg = latitude_deg
+        self.overall_time_s = overall_time_s
+        self.sampling_frequency_hz = sampling_frequency_hz
 
+    def validate(self):
+        '''Raise a ValueError if the scanning strategy is invalid.'''
 
-def load_scanning_strategy(stream) -> ScanningStrategy:
-    '''Build a ScanningStrategy object from its YAML representation.'''
-    return ScanningStrategy(**yaml.load(stream))
+        if not isinstance(self.wheel1_rpm, float) or self.wheel1_rpm < 0.0:
+            raise ValueError('invalid value for wheel1_rpm ({0})'
+                             .format(self.wheel1_rpm))
+
+        if not isinstance(self.wheel3_rpm, float) or self.wheel3_rpm < 0.0:
+            raise ValueError('invalid value for wheel3_rpm ({0})'
+                             .format(self.wheel3_rpm))
+
+        if not isinstance(self.wheel1_angle0_deg, float):
+            raise ValueError('invalid value for wheel1_angle0_deg ({0})'
+                             .format(self.wheel1_angle0_deg))
+
+        if not isinstance(self.wheel2_angle0_deg, float):
+            raise ValueError('invalid value for wheel2_angle0_deg ({0})'
+                             .format(self.wheel2_angle0_deg))
+
+        if not isinstance(self.wheel3_angle0_deg, float):
+            raise ValueError('invalid value for wheel3_angle0_deg ({0})'
+                             .format(self.wheel3_angle0_deg))
+
+        if not isinstance(self.latitude_deg, float) or \
+                self.latitude_deg < 0.0 or self.latitude_deg > 90.0:
+            raise ValueError('invalid value for latitude_deg ({0})'
+                             .format(self.latitude_deg))
+
+        if not isinstance(self.sampling_frequency_hz, float) or \
+                self.sampling_frequency_hz <= 0.0:
+            raise ValueError('invalid value for sampling_frequency_hz ({0})'
+                             .format(self.sampling_frequency_hz))
+
+    def save(self, stream):
+        '''Write a YAML representation of `self` into the stream.'''
+
+        yaml.dump({'wheel1_rpm': self.wheel1_rpm,
+                   'wheel3_rpm': self.wheel3_rpm,
+                   'wheel1_angle0_deg': self.wheel1_angle0_deg,
+                   'wheel2_angle0_deg': self.wheel2_angle0_deg,
+                   'wheel3_angle0_deg': self.wheel3_angle0_deg,
+                   'latitude_deg': self.latitude_deg,
+                   'overall_time_s': self.overall_time_s,
+                   'sampling_frequency_hz': self.sampling_frequency_hz},
+                  stream=stream,
+                  explicit_start=True,
+                  explicit_end=True)
+
+    def load(self, stream):
+        '''Build a ScanningStrategy object from its YAML representation.'''
+        d = yaml.load(stream)
+        self.wheel1_rpm = d['wheel1_rpm']
+        self.wheel3_rpm = d['wheel3_rpm']
+        self.wheel1_angle0_deg = d['wheel1_angle0_deg']
+        self.wheel2_angle0_deg = d['wheel2_angle0_deg']
+        self.wheel3_angle0_deg = d['wheel3_angle0_deg']
+        self.latitude_deg = d['latitude_deg']
+        self.overall_time_s = d['overall_time_s']
+        self.sampling_frequency_hz = d['sampling_frequency_hz']
 
 
 def time_to_rot_angle(time_vec: Any, rpm: float) -> Any:
@@ -141,6 +203,10 @@ def generate_pointings(scanning: ScanningStrategy,
 
 
 class TodWriter:
+    '''Write a TOD.
+
+    This class has been designed to be used together with `generate_pointings`. 
+    '''
 
     def __init__(self, outdir: str):
         self.outdir = outdir
@@ -189,7 +255,7 @@ class TodWriter:
         hdu.header['TODIDX'] = (index, '0-based index of this file')
 
         with io.StringIO() as primary_data:
-            save_scanning_strategy(strategy=scanning, stream=primary_data)
+            scanning.save(stream=primary_data)
             raw_bytes = np.array(list(primary_data.getvalue().encode('utf-8')))
             primhdu = fits.PrimaryHDU(data=raw_bytes)
 
@@ -200,45 +266,50 @@ class TodWriter:
 
 @click.command()
 @click.argument('output_path')
+@click.option('--input-file',
+              type=str,
+              default=None,
+              help='Path to a YAML file containing the parameters of the '
+              'scanning strategy')
 @click.option('--wheel1-rpm',
               'wheel1_rpm',
               type=float,
-              default=0.0,
+              default=None,
               help='Rotations per minute of the first (focal plane) wheel')
 @click.option('--wheel3-rpm',
               'wheel3_rpm',
               type=float,
-              default=1.0,
+              default=None,
               help='Rotations per minute of the third (ground) wheel')
 @click.option('--wheel1-angle0',
               'wheel1_angle0',
               type=float,
-              default=0.0,
+              default=None,
               help='Initial angle of the first (focal plane) wheel [deg]')
 @click.option('--wheel2-angle0',
               'wheel2_angle0',
               type=float,
-              default=10.0,
+              default=None,
               help='Initial angle of the second (elevation) wheel [deg]')
 @click.option('--wheel3-angle0',
               'wheel3_angle0',
               type=float,
-              default=0.0,
+              default=None,
               help='Initial angle of the third (ground) wheel [deg]')
 @click.option('--latitude',
               'latitude',
               type=float,
-              default=28.2916,
+              default=None,
               help='Latitude of the observing site (North is positive) [deg]')
 @click.option('--time',
               'time_length',
               type=float,
-              default=3600.0,
+              default=None,
               help='Amount of observation time [s]')
 @click.option('--samp',
               'sampfreq',
               type=float,
-              default=50.0,
+              default=None,
               help='Sampling frequency [Hz]')
 @click.option('--num-of-chunks',
               '-n',
@@ -251,7 +322,7 @@ class TodWriter:
               help='Pointing direction of the main beam with respect to '
               'the focal plane (3D vector, written as a comma-separated list '
               'of 3 numbers)')
-def main(output_path, wheel1_rpm, wheel3_rpm, wheel1_angle0, wheel2_angle0,
+def main(output_path, input_file, wheel1_rpm, wheel3_rpm, wheel1_angle0, wheel2_angle0,
          wheel3_angle0, latitude, time_length, sampfreq, num_of_chunks,
          direction):
     '''This function is called when the script is ran from the command line.'''
@@ -272,14 +343,29 @@ def main(output_path, wheel1_rpm, wheel3_rpm, wheel1_angle0, wheel2_angle0,
                   'three floating-point numbers (es., "0,0,1")')
         sys.exit(1)
 
-    scanning = ScanningStrategy(wheel1_rpm=wheel1_rpm,
-                                wheel3_rpm=wheel3_rpm,
-                                wheel1_angle0_deg=wheel1_angle0,
-                                wheel2_angle0_deg=wheel2_angle0,
-                                wheel3_angle0_deg=wheel3_angle0,
-                                latitude_deg=latitude,
-                                overall_time_s=time_length,
-                                sampling_frequency_hz=sampfreq)
+    scanning = ScanningStrategy()
+    if input_file is not None:
+        with open(input_file, 'rt') as f:
+            scanning.load(f)
+
+    if wheel1_rpm is not None:
+        scanning.wheel1_rpm = wheel1_rpm
+    if wheel3_rpm is not None:
+        scanning.wheel3_rpm = wheel3_rpm
+    if wheel1_angle0 is not None:
+        scanning.wheel1_angle0_deg = wheel1_angle0
+    if wheel2_angle0 is not None:
+        scanning.wheel2_angle0_deg = wheel2_angle0
+    if wheel3_angle0 is not None:
+        scanning.wheel3_angle0_deg = wheel3_angle0
+    if latitude is not None:
+        scanning.latitude_deg = latitude
+    if time_length is not None:
+        scanning.overall_time_s = time_length
+    if sampfreq is not None:
+        scanning.sampling_frequency_hz = sampfreq
+
+    scanning.validate()
 
     writer = TodWriter(output_path)
     generate_pointings(scanning=scanning,
