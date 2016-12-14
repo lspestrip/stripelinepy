@@ -144,7 +144,14 @@ def main(output_path, wheel1_rpm, wheel3_rpm, wheel1_angle0, wheel2_angle0,
         dirs = q.qrotate(tile_z, quat)
         poldirs = q.qrotate(tile_x, quat)
         theta, phi = healpy.vec2ang(dirs)
-        psi = np.arccos(poldirs[:, 2])
+
+        # The north direction for a vector v is just -dv/dtheta, as
+        # theta is the colatitude and moves along the meridian
+        thetapol, phipol = healpy.vec2ang(dirs)
+        northdir = np.column_stack((-np.cos(thetapol) * np.cos(phipol),
+                                    -np.cos(thetapol) * np.sin(phipol),
+                                    np.sin(thetapol)))
+        psi = np.arccos(np.sum(northdir * poldirs, axis=1))
 
         output_file_name = os.path.join(
             output_path, 'pointings_{0:04d}.fits'.format(chunk_idx))
