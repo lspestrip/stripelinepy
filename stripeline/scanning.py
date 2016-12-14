@@ -247,7 +247,7 @@ class TodWriter:
               help='Number of chunks for splitting the computation')
 @click.option('--direction',
               type=str,
-              default=[0., 0., 1.],
+              default='0,0,1',
               help='Pointing direction of the main beam with respect to '
               'the focal plane (3D vector, written as a comma-separated list '
               'of 3 numbers)')
