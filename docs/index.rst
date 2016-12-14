@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    math_conventions
+   instrument_configuration
    noisegen
    maptools
 

@@ -1,0 +1,441 @@
+---
+I0:
+    id: 0              
+    color: indigo        
+    module_id: 0
+    orientation:
+    - 4.720000e-06
+    - -0.000000e+00                                                                                                                               
+    - 1.000000e+00                                                                                                                               
+                                                                                                                                            
+I1:
+    id: 1              
+    color: indigo        
+    module_id: 1
+    orientation:
+    - -1.077670e-02
+    - -1.876756e-02                                                                                                                               
+    - 9.997658e-01                                                                                                                               
+                                                                                                                                            
+I2:
+    id: 2              
+    color: indigo        
+    module_id: 2
+    orientation:
+    - 1.089801e-02
+    - -1.876751e-02                                                                                                                               
+    - 9.997645e-01                                                                                                                               
+                                                                                                                                            
+I3:
+    id: 3              
+    color: indigo        
+    module_id: 3
+    orientation:
+    - 2.173680e-02
+    - -0.000000e+00                                                                                                                               
+    - 9.997637e-01                                                                                                                               
+                                                                                                                                            
+I4:
+    id: 4              
+    color: indigo        
+    module_id: 4
+    orientation:
+    - 1.089801e-02
+    - 1.876750e-02                                                                                                                               
+    - 9.997645e-01                                                                                                                               
+                                                                                                                                            
+I5:
+    id: 5              
+    color: indigo        
+    module_id: 5
+    orientation:
+    - -1.077669e-02
+    - 1.876958e-02                                                                                                                               
+    - 9.997658e-01                                                                                                                               
+                                                                                                                                            
+I6:
+    id: 6              
+    color: indigo        
+    module_id: 6
+    orientation:
+    - -2.161760e-02
+    - -2.647392e-18                                                                                                                               
+    - 9.997663e-01                                                                                                                               
+                                                                                                                                            
+Y0:
+    id: 7              
+    color: yellow        
+    module_id: 0
+    orientation:
+    - -5.782401e-02
+    - -3.369521e-02                                                                                                                               
+    - 9.977580e-01                                                                                                                               
+                                                                                                                                            
+Y1:
+    id: 8              
+    color: yellow        
+    module_id: 1
+    orientation:
+    - -6.840827e-02
+    - -5.237539e-02                                                                                                                               
+    - 9.962817e-01                                                                                                                               
+                                                                                                                                            
+Y2:
+    id: 9              
+    color: yellow        
+    module_id: 2
+    orientation:
+    - -4.684010e-02
+    - -5.249990e-02                                                                                                                               
+    - 9.975218e-01                                                                                                                               
+                                                                                                                                            
+Y3:
+    id: 10              
+    color: yellow        
+    module_id: 3
+    orientation:
+    - -3.639192e-02
+    - -3.381160e-02                                                                                                                               
+    - 9.987654e-01                                                                                                                               
+                                                                                                                                            
+Y4:
+    id: 11              
+    color: yellow        
+    module_id: 4
+    orientation:
+    - -4.712833e-02
+    - -1.499608e-02                                                                                                                               
+    - 9.987763e-01                                                                                                                               
+                                                                                                                                            
+Y5:
+    id: 12              
+    color: yellow        
+    module_id: 5
+    orientation:
+    - -6.850693e-02
+    - -1.489075e-02                                                                                                                               
+    - 9.975395e-01                                                                                                                               
+                                                                                                                                            
+Y6:
+    id: 13              
+    color: yellow        
+    module_id: 6
+    orientation:
+    - -7.914510e-02
+    - -3.358196e-02                                                                                                                               
+    - 9.962973e-01                                                                                                                               
+                                                                                                                                            
+O0:
+    id: 14              
+    color: orange        
+    module_id: 0
+    orientation:
+    - 5.556000e-04
+    - -6.740763e-02                                                                                                                               
+    - 9.977254e-01                                                                                                                               
+                                                                                                                                            
+O1:
+    id: 15              
+    color: orange        
+    module_id: 1
+    orientation:
+    - -9.948900e-03
+    - -8.612668e-02                                                                                                                               
+    - 9.962345e-01                                                                                                                               
+                                                                                                                                            
+O2:
+    id: 16              
+    color: orange        
+    module_id: 2
+    orientation:
+    - 1.190956e-02
+    - -8.615635e-02                                                                                                                               
+    - 9.962104e-01                                                                                                                               
+                                                                                                                                            
+O3:
+    id: 17              
+    color: orange        
+    module_id: 3
+    orientation:
+    - 2.227675e-02
+    - -6.744099e-02                                                                                                                               
+    - 9.974745e-01                                                                                                                               
+                                                                                                                                            
+O4:
+    id: 18              
+    color: orange        
+    module_id: 4
+    orientation:
+    - 1.117476e-02
+    - -4.867104e-02                                                                                                                               
+    - 9.987523e-01                                                                                                                               
+                                                                                                                                            
+O5:
+    id: 19              
+    color: orange        
+    module_id: 5
+    orientation:
+    - -1.049704e-02
+    - -4.863543e-02                                                                                                                               
+    - 9.987614e-01                                                                                                                               
+                                                                                                                                            
+O6:
+    id: 20              
+    color: orange        
+    module_id: 6
+    orientation:
+    - -2.105859e-02
+    - -6.737476e-02                                                                                                                               
+    - 9.975055e-01                                                                                                                               
+                                                                                                                                            
+R0:
+    id: 21              
+    color: red        
+    module_id: 0
+    orientation:
+    - 5.892517e-02
+    - -3.368940e-02                                                                                                                               
+    - 9.976938e-01                                                                                                                               
+                                                                                                                                            
+R1:
+    id: 22              
+    color: red        
+    module_id: 1
+    orientation:
+    - 4.823578e-02
+    - -5.247872e-02                                                                                                                               
+    - 9.974564e-01                                                                                                                               
+                                                                                                                                            
+R2:
+    id: 23              
+    color: red        
+    module_id: 2
+    orientation:
+    - 7.040389e-02
+    - -5.236922e-02                                                                                                                               
+    - 9.961429e-01                                                                                                                               
+                                                                                                                                            
+R3:
+    id: 24              
+    color: red        
+    module_id: 3
+    orientation:
+    - 8.094952e-02
+    - -3.359469e-02                                                                                                                               
+    - 9.961519e-01                                                                                                                               
+                                                                                                                                            
+R4:
+    id: 25              
+    color: red        
+    module_id: 4
+    orientation:
+    - 6.973080e-02
+    - -1.490279e-02                                                                                                                               
+    - 9.974545e-01                                                                                                                               
+                                                                                                                                            
+R5:
+    id: 26              
+    color: red        
+    module_id: 5
+    orientation:
+    - 4.775682e-02
+    - -1.498494e-02                                                                                                                               
+    - 9.987466e-01                                                                                                                               
+                                                                                                                                            
+R6:
+    id: 27              
+    color: red        
+    module_id: 6
+    orientation:
+    - 3.700671e-02
+    - -3.378581e-02                                                                                                                               
+    - 9.987437e-01                                                                                                                               
+                                                                                                                                            
+V0:
+    id: 28              
+    color: violet        
+    module_id: 0
+    orientation:
+    - 5.892517e-02
+    - 3.368940e-02                                                                                                                               
+    - 9.976938e-01                                                                                                                               
+                                                                                                                                            
+V1:
+    id: 29              
+    color: violet        
+    module_id: 1
+    orientation:
+    - 4.775682e-02
+    - 1.498494e-02                                                                                                                               
+    - 9.987466e-01                                                                                                                               
+                                                                                                                                            
+V2:
+    id: 30              
+    color: violet        
+    module_id: 2
+    orientation:
+    - 6.973080e-02
+    - 1.490279e-02                                                                                                                               
+    - 9.974545e-01                                                                                                                               
+                                                                                                                                            
+V3:
+    id: 31              
+    color: violet        
+    module_id: 3
+    orientation:
+    - 8.094952e-02
+    - 3.359469e-02                                                                                                                               
+    - 9.961519e-01                                                                                                                               
+                                                                                                                                            
+V4:
+    id: 32              
+    color: violet        
+    module_id: 4
+    orientation:
+    - 7.040389e-02
+    - 5.236922e-02                                                                                                                               
+    - 9.961429e-01                                                                                                                               
+                                                                                                                                            
+V5:
+    id: 33              
+    color: violet        
+    module_id: 5
+    orientation:
+    - 4.823578e-02
+    - 5.247872e-02                                                                                                                               
+    - 9.974564e-01                                                                                                                               
+                                                                                                                                            
+V6:
+    id: 34              
+    color: violet        
+    module_id: 6
+    orientation:
+    - 3.700671e-02
+    - 3.378581e-02                                                                                                                               
+    - 9.987437e-01                                                                                                                               
+                                                                                                                                            
+B0:
+    id: 35              
+    color: blue        
+    module_id: 0
+    orientation:
+    - 5.556000e-04
+    - 6.740763e-02                                                                                                                               
+    - 9.977254e-01                                                                                                                               
+                                                                                                                                            
+B1:
+    id: 36              
+    color: blue        
+    module_id: 1
+    orientation:
+    - -1.049704e-02
+    - 4.863543e-02                                                                                                                               
+    - 9.987614e-01                                                                                                                               
+                                                                                                                                            
+B2:
+    id: 37              
+    color: blue        
+    module_id: 2
+    orientation:
+    - 1.117476e-02
+    - 4.867104e-02                                                                                                                               
+    - 9.987523e-01                                                                                                                               
+                                                                                                                                            
+B3:
+    id: 38              
+    color: blue        
+    module_id: 3
+    orientation:
+    - 2.227675e-02
+    - 6.744099e-02                                                                                                                               
+    - 9.974745e-01                                                                                                                               
+                                                                                                                                            
+B4:
+    id: 39              
+    color: blue        
+    module_id: 4
+    orientation:
+    - 1.190956e-02
+    - 8.615635e-02                                                                                                                               
+    - 9.962104e-01                                                                                                                               
+                                                                                                                                            
+B5:
+    id: 40              
+    color: blue        
+    module_id: 5
+    orientation:
+    - -9.948900e-03
+    - 8.612668e-02                                                                                                                               
+    - 9.962345e-01                                                                                                                               
+                                                                                                                                            
+B6:
+    id: 41              
+    color: blue        
+    module_id: 6
+    orientation:
+    - -2.105859e-02
+    - 6.737476e-02                                                                                                                               
+    - 9.975055e-01                                                                                                                               
+                                                                                                                                            
+G0:
+    id: 42              
+    color: green        
+    module_id: 0
+    orientation:
+    - -5.782401e-02
+    - 3.369521e-02                                                                                                                               
+    - 9.977580e-01                                                                                                                               
+
+G1:
+    id: 43              
+    color: green        
+    module_id: 1
+    orientation:
+    - -6.850693e-02
+    - 1.489075e-02                                                                                                                               
+    - 9.975395e-01                                                                                                                               
+                                                                                                                                            
+G2:
+    id: 44              
+    color: green        
+    module_id: 2
+    orientation:
+    - -4.712833e-02
+    - 1.499608e-02                                                                                                                               
+    - 9.987763e-01                                                                                                                               
+                                                                                                                                            
+G3:
+    id: 45              
+    color: green        
+    module_id: 3
+    orientation:
+    - -3.639192e-02
+    - 3.381160e-02                                                                                                                               
+    - 9.987654e-01                                                                                                                               
+                                                                                                                                            
+G4:
+    id: 46              
+    color: green        
+    module_id: 4
+    orientation:
+    - -4.684010e-02
+    - 5.249990e-02                                                                                                                               
+    - 9.975218e-01                                                                                                                               
+                                                                                                                                            
+G5:
+    id: 47              
+    color: green        
+    module_id: 5
+    orientation:
+    - -6.840827e-02
+    - 5.237539e-02                                                                                                                               
+    - 9.962817e-01                                                                                                                               
+                                                                                                                                            
+G6:
+    id: 48              
+    color: green        
+    module_id: 6
+    orientation:
+    - -7.914510e-02
+    - 3.358196e-02                                                                                                                               
+    - 9.962973e-01                                                                                                                               
