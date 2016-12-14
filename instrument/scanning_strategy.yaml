@@ -1,0 +1,12 @@
+---
+wheel1_rpm: 0.0
+wheel3_rpm: 1.0
+
+wheel1_angle0_deg: 0.0
+wheel2_angle0_deg: 25.0
+wheel3_angle0_deg: 0.0
+
+latitude_deg: 28.2916  # Tenerife
+overall_time_s: 31536000.0  # One year of observations
+sampling_frequency_hz: 50.0
+...
