@@ -1,6 +1,45 @@
 #!/usr/bin/env python3
 # -*- encoding: utf-8 -*-
-'''Scanning strategy simulation
+
+'''Functions to simulate the observation of the sky through the year.
+
+We call *scanning strategy* the way the instrument changes its orientation
+towards the sky with the passing of time. It is encoded as a set of times and
+sky coordinates, and it depends on the way the Earth rotates and the 
+instrument wheels are operated. 
+
+Stripeline offers a set of utilities to generate a scanning strategy, given
+a set of instrumental parameters. These are used to determine which 
+configuration has the most desirable properties in terms of the scientific
+outcome (sky coverage, integration time per pixel, etc.).
+
+The function which creates pointing information from a description of the
+scanning strategy is :meth:`~stripeline.scanning.generate_pointings`, which
+depends on the class
+:class:`~stripeline.scanning.ScanningStrategy`.
+
+Here is a short example which shows how to use these facilities::
+
+    import stripeline.scanning as sc
+
+    def save_tod(pointings, 
+                 scanning: sc.ScanningStrategy,
+                 dir_vec, 
+                 index: int):
+        # Here you can save/use "pointings", which is a 4xn matrix
+        pass
+
+    scanning = sc.ScanningStrategy(wheel3_rpm=1.0,
+                                   latitude_deg=28.3,
+                                   overall_time_s=3600.0,
+                                   sampling_frequency_hz=50.0)
+    generate_pointings(scanning=scanning,
+                       dir_vec=[0., 0., 1.],
+                       num_of_chunks=1,
+                       tod_callback=save_tod)
+
+This module provides the class :class:`~stripeline.scanning.TodWriter`, which
+saves pointing information in FITS files.
 '''
 
 import logging as log
@@ -19,13 +58,31 @@ import stripeline.timetools as timetools
 
 
 class ScanningStrategy:
-    '''Parameters of a sky scanning strategy.abs
+    '''Parameters of a sky scanning strategy.
 
     This class holds together a number of information needed to define a 
     strategy to scan the sky. It works like a named tuple, but it allows
-    members to be changed after the object has been created.abs
+    members to be changed after the object has been created.
 
-    The class implements YAML serialization.'''
+    The following parameters are accepted:
+
+    - `wheel1_rpm`: rotations per minute of the first wheel 
+        (focal plane wheel);
+    - `wheel3_rpm`: rotations per minute of the third wheel 
+        (ground wheel, also called «azimuth wheel»);
+    - `wheel1_angle0_deg`: angle of the first wheel when the simulation 
+        starts (degrees);
+    - `wheel2_angle0_deg`: angle of the second wheel (elevation wheel) 
+        when the simulation starts (degrees);
+    - `wheel3_angle0_deg`: angle of the third wheel when the simulation
+        starts (degrees);
+    - `latitude_deg`: latitude (in degrees) of the observing site;
+    - `overall_time_s`: overall duration of the observation (in seconds);
+    - `sampling_frequency_hz`: sampling frequency of the detector (in Hz).
+
+     The class implements YAML serialization through the methods 
+     :meth:`~stripeline.scanning.ScanningStrategy.load` and
+     :meth:`~stripeline.scanning.ScanningStrategy.save`.'''
 
     def __init__(self,
                  wheel1_rpm=0.0,
@@ -94,7 +151,7 @@ class ScanningStrategy:
                   explicit_end=True)
 
     def load(self, stream):
-        '''Build a ScanningStrategy object from its YAML representation.'''
+        '''Build a :class:`ScanningStrategy` object from its YAML representation.'''
         d = yaml.load(stream)
         self.wheel1_rpm = d['wheel1_rpm']
         self.wheel3_rpm = d['wheel3_rpm']
@@ -120,9 +177,9 @@ def time_to_rot_angle(time_vec: Any, rpm: float) -> Any:
 
 
 def generate_pointings(scanning: ScanningStrategy,
-                       dir_vec,
-                       num_of_chunks: int,
-                       tod_callback):
+                       dir_vec=[0, 0, 1],
+                       num_of_chunks=1,
+                       tod_callback=None):
     '''Generate a set of pointing directions.
 
     Simulate the scanning of the sky with the parameters provided in
@@ -132,13 +189,14 @@ def generate_pointings(scanning: ScanningStrategy,
     be silently thrown away once they have been computed.)
 
     The callback must accept the following parameters:
-    - pointings: this is a 4xn matrix containing the time (in seconds),
+
+    - `pointings`: 4xn matrix containing the time (in seconds),
       colatitude (in radians), longitude (ditto), and polarization angle
       (ditto), each in its own column;
-    - scanning: this is a copy of the parameter passed to this function
-    - dir_vec: this is a copy of the parameter passed to this function
-    - index: this is a counter which keeps track of how many times the
-      callback has been called, starting from 0
+    - `scanning`: copy of the parameter passed to this function;
+    - `dir_vec`: copy of the parameter passed to this function;
+    - `index`: counter which keeps track of how many times the
+      callback has been called, starting from 0.
     '''
     x_vec = np.array([1, 0, 0])
     z_vec = np.array([0, 0, 1])
@@ -205,11 +263,27 @@ def generate_pointings(scanning: ScanningStrategy,
 class TodWriter:
     '''Write a TOD.
 
-    This class has been designed to be used together with `generate_pointings`. 
+    This class has been designed to be used together with
+    :meth:`~stripeline.scanning.generate_pointings`.
+
+    You create an instance of the object and then pass it to 
+    :meth:`~stripeline.scanning.generate_pointings`, like in the following way::
+
+        writer = TodWriter(outdir='/storage', 
+                           file_name_mask='mytod_{index:04d}.fits.gz')
+        generate_pointings(..., tod_callback=writer)
+
+    As you can see, you can use the `index` key in the `file_name_mask`
+    parameter to separate the files in chunks. The number of times `writer` is 
+    called depends on the parameter `num_of_chunks` passed to
+    :meth:`~stripeline.scanning.generate_pointings`.
     '''
 
-    def __init__(self, outdir: str):
+    def __init__(self,
+                 outdir='.',
+                 file_name_mask='pointings_{index:04d}.fits'):
         self.outdir = outdir
+        self.file_name_mask = file_name_mask
 
     def __call__(self,
                  pointings,
@@ -219,7 +293,7 @@ class TodWriter:
         ''' Save a TOD into a FITS file'''
 
         file_name = os.path.join(self.outdir,
-                                 'pointings_{0:04d}.fits'.format(index))
+                                 self.file_name_mask.format(index=index))
         cols = [
             fits.Column(name=name, format=fmt, unit=unit, array=arr)
             for name, fmt, unit, arr in (('TIME', 'D', 's', pointings[:, 0]),

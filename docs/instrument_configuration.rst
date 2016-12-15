@@ -22,7 +22,7 @@ length one which points toward the point on the sky sphere where the centre
 of the main beam is located. The boresight direction coincides with horn I0,
 and it is conventionally set to be `(0, 0, 1)` (the z axis).
 
-Here are the first few lines of the file, to show its structure:
+Here are a reduced version of the file, containing only two horns:
 
 .. code-block:: yaml
 
@@ -44,6 +44,19 @@ Here are the first few lines of the file, to show its structure:
         - -1.077670e-02
         - -1.876756e-02                                                                                                                               
         - 9.997658e-01                                                                                                                               
+    ...
+
+Each entry contains the following items:
+
+=============== ======= ==============================================
+Name            Type    Meaning
+=============== ======= ==============================================
+``id``          int     Unique index of the horn (0-48)
+``color``       str     Color of the module to whom the horn belongs
+``module_id``   int     Index of the horn within the module (0-6)
+``orientation`` tuple   3D vector of length one
+=============== ======= ==============================================
+
 
 The PyYAML module loads YAML files into dictionaries. So, in order to access the
 ``color`` field of the horn ``I0``, you can write::
@@ -61,3 +74,10 @@ U and V are the X and Y components of the orientations:
 The plot has been created using the following script:
 
 .. literalinclude:: strip_focal_plane_plot.py
+
+Scanning strategy
+-----------------
+
+.. automodule:: stripeline.scanning
+                :members:
+
