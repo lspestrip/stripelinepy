@@ -4,7 +4,9 @@
 import stripeline.noisegen as ng
 import unittest as ut
 
+
 class TestFlatRNG(ut.TestCase):
+
     def test_identity(self):
         'Check that the generator\'s result match the C++ implementation'
 
@@ -24,6 +26,7 @@ class TestFlatRNG(ut.TestCase):
 
 
 class TestNormalRNG(ut.TestCase):
+
     def test_gaussW(self):
         'Check that the generator\'s result match the C++ implementation'
 
@@ -43,6 +46,7 @@ class TestNormalRNG(ut.TestCase):
 
 
 class TestOof2RNG(ut.TestCase):
+
     def test_identity(self):
         'Check that the generator\'s result match the C++ implementation'
 
@@ -59,6 +63,27 @@ class TestOof2RNG(ut.TestCase):
                                          -0.9190954646, -1.0864977062]):
             self.assertAlmostEqual(rng.next(), reference,
                                    msg='Reference #{0} does not match'.format(idx))
+
+
+class TestOofRNG(ut.TestCase):
+
+    def test_identity(self):
+        'Check that the generator\'s result match the C++ implementation'
+
+        rng = ng.OofRNG(alpha=-1.7, fmin=1.15e-5, fknee=0.05, fsample=1.0)
+        for idx, reference in enumerate([2.0400958027, -0.6813881047,
+                                         -0.3848671621, 0.84863765610,
+                                         0.34838982440, -1.6703162833,
+                                         0.13588215630, -0.1362109745,
+                                         -0.6176813736, -0.7037434318,
+                                         -2.2015645097, -2.1249009577,
+                                         -0.6866971017, -2.1640479726,
+                                         -1.9400718236, -0.1768193407,
+                                         -1.1308790625, -1.2995275170,
+                                         -0.5582322798, -0.7326164277]):
+            self.assertAlmostEqual(rng.next(), reference,
+                                   msg='Reference #{0} does not match'.format(idx))
+
 
 if __name__ == '__main__':
     ut.main()

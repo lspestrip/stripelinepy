@@ -109,3 +109,29 @@ class Oof2RNG:
         'Fill the ``array`` vector with a sequence of pseudorandom numbers'
         rng.fill_vector_oof2(self.state, self.empty, self.gset,
                              self.oof2_state, array)
+
+
+class OofRNG:
+    '''Random number generator with spectral power 1/f^a
+
+    The random numbers have zero mean. The value of a must be in the range [-2, 0).'''
+
+    def __init__(self, alpha, fmin, fknee, fsample,
+                 x_init=0, y_init=0, z_init=0, w_init=0):
+        self.flat_state = rng.init_rng(x_init, y_init, z_init, w_init)
+        self.empty = np.ones(1, dtype='int8')
+        self.gset = np.zeros(1, dtype='float64')
+        self.oof_state = np.empty(rng.oof_state_size(fmin, fknee, fsample),
+                                  dtype='float64')
+        self.num_of_states = rng.init_oof(alpha, fmin, fknee, fsample,
+                                          self.oof_state)
+
+    def next(self):
+        'Return a new pseudorandom number'
+        return rng.rand_oof(self.flat_state, self.empty,
+                            self.gset, self.oof_state, self.num_of_states)
+
+    def fill_vector(self, array):
+        'Fill the ``array`` vector with a sequence of pseudorandom numbers'
+        rng.fill_vector_oof(self.state, self.empty, self.gset,
+                            self.oof_state, self.num_of_states, array)

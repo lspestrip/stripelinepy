@@ -51,6 +51,13 @@ interface
         integer intent(hide), depend(array) :: num
     end subroutine fill_vector_normal
 
+    function oof2_state_size
+        intent(c) oof2_state_size
+        intent(c)
+
+        integer(kind=4) :: oof2_state_size
+    end function oof2_state_size
+
     subroutine init_oof2(fmin, fknee, fsample, oof2_state)
         intent(c) init_oof2
         intent(c)
@@ -84,6 +91,55 @@ interface
         double precision, dimension(num), intent(inout) :: array
         integer intent(hide), depend(array) :: num
     end subroutine fill_vector_oof2
+
+    function oof_state_size(fmin, fknee, fsample)
+        intent(c) oof_state_size
+        intent(c)
+
+        double precision, intent(in) :: fmin
+        double precision, intent(in) :: fknee
+        double precision, intent(in) :: fsample
+
+        integer(kind=4) :: oof_state_size
+    end function oof_state_size
+
+    function init_oof(slope, fmin, fknee, fsample, oof_state)
+        intent(c) init_oof
+        intent(c)
+
+        double precision, intent(in) :: slope
+        double precision, intent(in) :: fmin
+        double precision, intent(in) :: fknee
+        double precision, intent(in) :: fsample
+        double precision, dimension(:), intent(inout) :: oof_state
+        integer(kind=4) :: init_oof
+    end function init_oof
+
+    function rand_oof(flat_state, empty, gset, oof_state, state_size)
+        intent(c) rand_oof
+        intent(c)
+
+        integer(kind=4), dimension(4), intent(inout) :: flat_state
+        integer(kind=1), dimension(1), intent(inout) :: empty
+        double precision, dimension(1), intent(inout) :: gset
+        double precision, dimension(:), intent(inout) :: oof_state
+        integer(kind=4), intent(in) :: state_size
+
+        double precision :: rand_oof
+    end function rand_oof
+
+    subroutine fill_vector_oof(state, empty, gset, oof_state, state_size, array, num)
+        intent(c) fill_vector_oof
+        intent(c)
+
+        integer(kind=4), intent(inout), dimension(4) :: state
+        integer(kind=1), dimension(1), intent(inout) :: empty
+        double precision, dimension(1), intent(inout) :: gset
+        double precision, dimension(1), intent(inout) :: oof_state
+        integer(kind=4), intent(in) :: state_size
+        double precision, dimension(num), intent(inout) :: array
+        integer intent(hide), depend(array) :: num
+    end subroutine fill_vector_oof
 
 end interface
 end python module rng
