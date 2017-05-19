@@ -19,6 +19,7 @@ libraries:
 - PyYAML (http://pyyaml.org)
 - Click (http://click.pocoo.org)
 
+The code has been tested under Linux. It won't run under Windows, at least not until [Healpy will support it](https://github.com/healpy/healpy/issues/25).
 
 # Install
 
