@@ -26,3 +26,14 @@ class TestMaptools(ut.TestCase):
         ])
 
         self.assertTrue(np.allclose(expected, cond.matr))
+
+class TestMapMakers(ut.TestCase):
+
+    def testNonoiseMap(self):
+        reference_map = np.array([7.0, 9.0, 5.0, 2.0, 4.0, 12.0])
+        pixidx = np.array([1, 1, 2, 5, 4, 4, 5, 0, 3, 2, 0, 4], dtype='int')
+        signal = reference_map[pixidx]
+
+        result = mt.nonoise_map(signal, pixidx, 6)
+        self.assertTrue(np.allclose(reference_map, result),
+                         "reference = {0}, result = {1}".format(reference_map, result))

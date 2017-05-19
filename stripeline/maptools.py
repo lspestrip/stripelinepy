@@ -68,3 +68,31 @@ class ConditionMatrix:
                 np.linalg.cond(np.reshape(self.matr[cur_pixel], (3, 3)))
 
         return cond_map
+
+def nonoise_map(signal, pixidx, num_of_pixels):
+    '''Convert a timeline into a map assuming no noise.
+
+    This function estimates the map produced from ``signal`` (a vector
+    containing the timeline of measurements), assuming that each sample
+    in ``signal`` was looking at the sky along the direction specified
+    by each element in ``pixidx`` (a vector containing the index of
+    the pixels). The value of ``num_of_pixels`` is the length of the
+    vector containing the map that is returned by this function.
+
+    This function assumes that there is *no noise at all* in ``signal``.
+    '''
+
+    assert len(signal) == len(pixidx)
+    assert isinstance(num_of_pixels, int)
+    assert num_of_pixels > 0
+
+    mappixels = np.zeros(num_of_pixels)
+    observed = np.zeros(num_of_pixels, dtype='bool')
+
+    for i in range(len(signal)):
+        cur_pixel_pos = pixidx[i]
+        if not observed[cur_pixel_pos]:
+            mappixels[cur_pixel_pos] = signal[i]
+            observed[cur_pixel_pos] = True
+
+    return mappixels
