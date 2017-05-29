@@ -96,3 +96,35 @@ def nonoise_map(signal, pixidx, num_of_pixels):
             observed[cur_pixel_pos] = True
 
     return mappixels
+
+def binned_map(signal, pixidx, num_of_pixels):
+    '''Convert a timeline into a map assuming white noise with zero mean.
+
+    This function estimates the map produced from ``signal`` (a vector
+    containing the timeline of measurements), assuming that each sample
+    in ``signal`` was looking at the sky along the direction specified
+    by each element in ``pixidx`` (a vector containing the index of
+    the pixels). The value of ``num_of_pixels`` is the length of the
+    vector containing the map that is returned by this function.
+
+    This function assumes that only white noise with zero mean is present
+    in ``signal``.
+    '''
+
+    assert len(signal) == len(pixidx)
+    assert isinstance(num_of_pixels, int)
+    assert num_of_pixels > 0
+
+    mappixels = np.zeros(num_of_pixels)
+    hits = np.zeros(num_of_pixels, dtype='int')
+
+    for i in range(len(signal)):
+        cur_pixel_pos = pixidx[i]
+        mappixels[cur_pixel_pos] += signal[i]
+        hits[cur_pixel_pos] += 1
+
+    for j in range(len(mappixels)):
+        if hits[j] > 0:
+            mappixels[j] /= hits[j]
+    
+    return mappixels

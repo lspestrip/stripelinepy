@@ -37,3 +37,13 @@ class TestMapMakers(ut.TestCase):
         result = mt.nonoise_map(signal, pixidx, 6)
         self.assertTrue(np.allclose(reference_map, result),
                          "reference = {0}, result = {1}".format(reference_map, result))
+
+    def testBinnedMap(self):
+        # Pixel at pos. 1 is never observed (see pixidx)
+        reference_map = np.array([5.0, 0.0, 2.0, -1.0])
+        pixidx = np.array([0, 2, 2, 3, 0, 2], dtype='int')
+        signal = np.array([4.0, 1.0, 2.0, -1.0, 6.0, 3.0])
+
+        result = mt.binned_map(signal, pixidx, 4)
+        self.assertTrue(np.allclose(reference_map, result),
+                        "reference = {0}, result = {1}".format(reference_map, result))
