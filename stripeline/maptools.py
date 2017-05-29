@@ -118,13 +118,6 @@ def binned_map(signal, pixidx, num_of_pixels):
     mappixels = np.zeros(num_of_pixels)
     hits = np.zeros(num_of_pixels, dtype='int')
 
-    for i in range(len(signal)):
-        cur_pixel_pos = pixidx[i]
-        mappixels[cur_pixel_pos] += signal[i]
-        hits[cur_pixel_pos] += 1
+    _m.binned_map(signal, pixidx, mappixels, hits)
 
-    for j in range(len(mappixels)):
-        if hits[j] > 0:
-            mappixels[j] /= hits[j]
-    
     return mappixels
