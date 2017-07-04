@@ -8,8 +8,9 @@ import os
 import io
 import logging as log
 from astropy.io import fits
+from typing import Any, Dict, List
 import scanning
-
+import paramfile
 
 
 class TodWriter:
@@ -17,11 +18,13 @@ class TodWriter:
                  sky_map_I,
                  sky_map_Q,
                  sky_map_U,
+                 parameters: Dict[str, Any],
                  outdir='.',
                  file_name_mask='TOI_{index:04d}.fits'):
         self.sky_map_I = sky_map_I
         self.sky_map_Q = sky_map_Q
         self.sky_map_U = sky_map_U
+        self.parameters = parameters
         self.outdir = outdir
         self.file_name_mask = file_name_mask
 
@@ -30,12 +33,12 @@ class TodWriter:
                  scanning: scanning.ScanningStrategy,
                  dir_vec,
                  index: int):
-
         ''' Save a TOD into a FITS file'''
 
         file_name = os.path.join(self.outdir,
                                  self.file_name_mask.format(index=index))
-        pixidx = healpy.ang2pix(healpy.get_nside(self.sky_map_Q), pointings[:, 1], pointings[:, 2])
+        pixidx = healpy.ang2pix(healpy.get_nside(
+            self.sky_map_Q), pointings[:, 1], pointings[:, 2])
 
         TOI_I_sky = self.sky_map_I[pixidx]
         TOI_Q_sky = self.sky_map_Q[pixidx]
@@ -43,13 +46,22 @@ class TodWriter:
 
         TwoPsi = pointings[:, 3] * 2
         TOI_I_beam = TOI_I_sky
-        TOI_Q_beam = TOI_Q_sky*np.cos(TwoPsi) - TOI_U_sky*np.sin(TwoPsi)
-        TOI_U_beam = TOI_Q_sky*np.sin(TwoPsi) + TOI_U_sky*np.cos(TwoPsi)
+        TOI_Q_beam = TOI_Q_sky * np.cos(TwoPsi) - TOI_U_sky * np.sin(TwoPsi)
+        TOI_U_beam = TOI_Q_sky * np.sin(TwoPsi) + TOI_U_sky * np.cos(TwoPsi)
 
-        det_output_1 = 1/4 * (TOI_I_beam + TOI_Q_beam)
-        det_output_2 = 1/4 * (TOI_I_beam - TOI_Q_beam)
-        det_output_3 = 1/4 * (TOI_I_beam + TOI_U_beam)
-        det_output_4 = 1/4 * (TOI_I_beam - TOI_U_beam)
+        det_output_Q1 = 1 / 4 * (TOI_I_beam + TOI_Q_beam)
+        det_output_Q2 = 1 / 4 * (TOI_I_beam - TOI_Q_beam)
+        det_output_U1 = 1 / 4 * (TOI_I_beam + TOI_U_beam)
+        det_output_U2 = 1 / 4 * (TOI_I_beam - TOI_U_beam)
+
+        det_output_Q1 += np.random.normal(
+            scale=self.parameters['wn_sigma_det_Q1_k'], size=len(det_output_Q1))
+        det_output_Q2 += np.random.normal(
+            scale=self.parameters['wn_sigma_det_Q2_k'], size=len(det_output_Q2))
+        det_output_U1 += np.random.normal(
+            scale=self.parameters['wn_sigma_det_U1_k'], size=len(det_output_U1))
+        det_output_U2 += np.random.normal(
+            scale=self.parameters['wn_sigma_det_U2_k'], size=len(det_output_U2))
 
         cols = [
             fits.Column(name=name, format=fmt, unit=unit, array=arr)
@@ -58,10 +70,10 @@ class TodWriter:
                                           pointings[:, 1]),
                                          ('PHI', 'D', 'rad', pointings[:, 2]),
                                          ('PSI', 'D', 'rad', pointings[:, 3]),
-                                         ('DET1', 'D', 'K', det_output_1),
-                                         ('DET2', 'D', 'K', det_output_2),
-                                         ('DET3', 'D', 'K', det_output_3),
-                                         ('DET4', 'D', 'K', det_output_4))
+                                         ('DETQ1', 'D', 'K', det_output_Q1),
+                                         ('DETQ2', 'D', 'K', det_output_Q2),
+                                         ('DETU1', 'D', 'K', det_output_U1),
+                                         ('DETU2', 'D', 'K', det_output_U2))
         ]
         hdu = fits.BinTableHDU.from_columns(cols, name='TOD')
         hdu.header['FSTTIME'] = (
@@ -99,25 +111,24 @@ class TodWriter:
         log.info('file "%s" written successfully', file_name)
 
 
-
-
-
-
-
-
 @click.command()
-@click.argument('parameter_file')
+@click.argument('parameter_file', nargs=-1)
 @click.argument('sky_map_filename')
 @click.argument('output_path')
 def main(parameter_file, sky_map_filename, output_path):
-    strategy = scanning.ScanningStrategy()
-    with open(parameter_file, 'rt') as f:
-        strategy.load(f)    
-    sky_map = healpy.read_map(sky_map_filename, field=(0, 1, 2)) #0 = Temperature, 1 = Stokes Parameter Q, 2=Stokes Parameter U
 
-    writer = TodWriter(sky_map[0], sky_map[1], sky_map[2], output_path)
- 
+    strategy = scanning.ScanningStrategy()
+    parameters = paramfile.load_yaml_files(parameter_file)
+    strategy.load(parameters)
+
+    # 0 = Temperature, 1 = Stokes Parameter Q, 2=Stokes Parameter U
+    sky_map = healpy.read_map(sky_map_filename, field=(0, 1, 2))
+
+    writer = TodWriter(sky_map[0], sky_map[1],
+                       sky_map[2], parameters, output_path)
+
     scanning.generate_pointings(strategy, [0, 0, 1], 1, writer)
+
 
 if __name__ == '__main__':
     main()

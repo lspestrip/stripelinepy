@@ -150,9 +150,15 @@ class ScanningStrategy:
                   explicit_start=True,
                   explicit_end=True)
 
-    def load(self, stream):
-        '''Build a :class:`ScanningStrategy` object from its YAML representation.'''
-        d = yaml.load(stream)
+    def load(self, input):
+        '''Build a :class:`ScanningStrategy` object from its YAML representation.
+        
+        The parameter "input" can either be a file object, a dictionary or a string.'''
+        if isinstance(input, dict):
+            d = input
+        else:
+            d = yaml.load(input)
+
         self.wheel1_rpm = d['wheel1_rpm']
         self.wheel3_rpm = d['wheel3_rpm']
         self.wheel1_angle0_deg = d['wheel1_angle0_deg']
