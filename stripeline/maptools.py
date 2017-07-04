@@ -109,6 +109,8 @@ def binned_map(signal, pixidx, num_of_pixels):
 
     This function assumes that only white noise with zero mean is present
     in ``signal``.
+
+    This function returns a tuple containing the binned map and the hit map.
     '''
 
     assert len(signal) == len(pixidx)
@@ -120,4 +122,4 @@ def binned_map(signal, pixidx, num_of_pixels):
 
     _m.binned_map(signal, pixidx, mappixels, hits)
 
-    return mappixels
+    return mappixels, hits
