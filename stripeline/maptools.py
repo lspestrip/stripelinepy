@@ -1,7 +1,18 @@
 #!/usr/bin/env python3
 # -*- encoding: utf-8 -*-
 
-'''Map-related facilities
+'''The functions and classes provided in this submodule allow to compute
+maximum-likelihood maps and perform analysis on condition numbers.
+
+Here is an overview of the tools provided by this submodule:
+
+- :class:`ConditionMatrix` allows to compute the inverse condition numbers from
+  a timeline. It is mildly useful in the context of STRIP data analysis, because
+
+- :func:`binned_map` bins a map, assuming only uncorrelated noise.
+
+The functions implemented in this code are still not able to take advantage of
+MPI.
 '''
 
 from typing import Any
@@ -107,10 +118,29 @@ def binned_map(signal, pixidx, num_of_pixels):
     the pixels). The value of ``num_of_pixels`` is the length of the
     vector containing the map that is returned by this function.
 
-    This function assumes that only white noise with zero mean is present
-    in ``signal``.
+    This function assumes that the only kind of noise in ``signal`` is
+    uncorrelated noise with zero mean and symmetric probability function.
 
     This function returns a tuple containing the binned map and the hit map.
+
+    The following example loads the pointing information and the signal TOD
+    from a FITS file, creates a map and saves it to disk::
+
+        from stripeline import maptools as mt
+        import healpy
+        from astropy.io import fits
+
+        # Read pointings and signal from a FITS file
+        with fits.open('toi.fits') as f:
+            theta, phi, signal = [f[1].data.field(x)
+                                  for x in ('THETA', 'PHI', 'SIGNAL')]
+
+        NSIDE = 256
+        pixidx = healpy.ang2pix(NSIDE, theta, phi)
+        m, hits = mt.binned_map(signal, pixidx, healpy.nside2npix(pixidx))
+
+        # Save both the sky map and the hit map
+        healpy.write_map('map.fits', (m, hits))
     '''
 
     assert len(signal) == len(pixidx)
