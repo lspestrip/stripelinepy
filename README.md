@@ -2,7 +2,7 @@
 
 A simulation pipeline for the STRIP instrument.
 
-[![Build Status](https://travis-ci.org/ziotom78/stripeline.svg?branch=master)](https://travis-ci.org/ziotom78/stripeline)
+[![Build Status](https://travis-ci.org/lspestrip/stripeline.svg?branch=master)](https://travis-ci.org/lspestrip/stripeline)
 
 [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/)
 
