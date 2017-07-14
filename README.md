@@ -11,30 +11,32 @@ A simulation pipeline for the STRIP instrument.
 
 # Requirements
 
-You'll need Python 3.x, a Fortran 2003 compiler, and the following Python
-libraries:
-- Numpy (http://www.numpy.org)
-- Astropy (http://www.astropy.org)
-- Healpy (https://github.com/healpy/healpy)
-- PyYAML (http://pyyaml.org)
-- Click (http://click.pocoo.org)
+You'll need Python 3.x, a Fortran 2003 compiler, and the Python libraries listed
+in the file
+[requirements.txt](https://github.com/lspestrip/stripeline/blob/master/requirements.txt)
 
-The code has been tested under Linux. It won't run under Windows, at least not until [Healpy will support it](https://github.com/healpy/healpy/issues/25).
+The code has been tested under Linux. It won't run under Windows, at least not
+until [Healpy will support it](https://github.com/healpy/healpy/issues/25).
 
 # Install
 
-After having downloaded/cloned this repository, enter the folder and
-run the following command:
+If you're a developer, download/clone this repository, enter the folder
+and run the following command:
+
+    pip install -e .
+
+This will create soft links to the source files in the folders used by your
+Python distribution. In this way, every time you modify a source file, the
+change will be immediately visible to the system without the need to re-install
+Stripeline.
+
+If you're just a casual user, after having downloaded/cloned this repository,
+enter the folder and run the following command:
 
     python setup.py install
 
 This will install the script `stripsim`, which can be run from the
 command line. (If it does not start, check your `PATH` settings.)
-
-If you're a developer, you can build and run the code within the
-repository folder and install it using the following command:
-
-    pip install -e .
 
 You can now run each of the tests under the directory `tests`, like
 this:
@@ -51,7 +53,8 @@ and run all the tests automatically:
 
 # Documentation
 
-The documentation is hosted on [ReadTheDocs](http://stripeline.readthedocs.io).
+The documentation is hosted on [ReadTheDocs](http://stripeline.readthedocs.io) and
+rebuilt automatically every time the `master` branch is updated.
 
 
 # License
