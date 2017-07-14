@@ -13,6 +13,7 @@ Contents:
 
    math_conventions
    instrument_configuration
+   paramfile
    noisegen
    maptools
 
