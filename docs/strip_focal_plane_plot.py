@@ -5,7 +5,7 @@ with open('../instrument/strip_focal_plane.yaml', 'rt') as f:
     focal_plane = yaml.load(f)
 
 points = [(x['orientation'][0], x['orientation'][1], key, x['color'])
-          for key, x in focal_plane.items()]
+          for key, x in focal_plane['horns'].items()]
 plt.scatter(x=[x[0] for x in points],
             y=[x[1] for x in points],
             color=[x[3] for x in points],

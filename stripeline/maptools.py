@@ -240,8 +240,29 @@ def binned_map(signal, pixidx, num_of_pixels):
     the pixels). The value of ``num_of_pixels`` is the length of the
     vector containing the map that is returned by this function.
 
-    This function assumes that only white noise with zero mean is present
-    in ``signal``.
+    This function assumes that the only kind of noise in ``signal`` is
+    uncorrelated noise with zero mean and symmetric probability function.
+
+    This function returns a tuple containing the binned map and the hit map.
+
+    The following example loads the pointing information and the signal TOD
+    from a FITS file, creates a map and saves it to disk::
+
+        from stripeline import maptools as mt
+        import healpy
+        from astropy.io import fits
+
+        # Read pointings and signal from a FITS file
+        with fits.open('toi.fits') as f:
+            theta, phi, signal = [f[1].data.field(x)
+                                  for x in ('THETA', 'PHI', 'SIGNAL')]
+
+        NSIDE = 256
+        pixidx = healpy.ang2pix(NSIDE, theta, phi)
+        m, hits = mt.binned_map(signal, pixidx, healpy.nside2npix(pixidx))
+
+        # Save both the sky map and the hit map
+        healpy.write_map('map.fits', (m, hits))
     '''
 
     assert len(signal) == len(pixidx)
@@ -253,4 +274,4 @@ def binned_map(signal, pixidx, num_of_pixels):
 
     _m.binned_map(signal, pixidx, mappixels, hits)
 
-    return mappixels
+    return mappixels, hits

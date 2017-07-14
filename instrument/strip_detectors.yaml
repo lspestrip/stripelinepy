@@ -1,0 +1,884 @@
+---
+polarimeters:
+    - id: 1
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 2
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 3
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 4
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 5
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 6
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 7
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 8
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 9
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 10
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 11
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 12
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 13
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 14
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 15
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 16
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 17
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 18
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 19
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 20
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 21
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 22
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 23
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 24
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 25
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 26
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 27
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 28
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 29
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 30
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 31
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 32
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 33
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 34
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 35
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 36
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 37
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 38
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 39
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 40
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 41
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 42
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 43
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 44
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 45
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 46
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 47
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 48
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+
+    - id: 49
+      det_q1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_q2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u1:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+      det_u2:
+          fknee_hz: 10
+          alpha: 2.0
+          wn_sigma_k: 1.0
+...

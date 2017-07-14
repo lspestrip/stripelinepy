@@ -3,3 +3,5 @@ healpy
 astropy
 pyyaml
 click
+mpi4py
+flask

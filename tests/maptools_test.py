@@ -98,6 +98,7 @@ class TestMapMakers(ut.TestCase):
         pixidx = np.array([0, 2, 2, 3, 0, 2], dtype='int')
         signal = np.array([4.0, 1.0, 2.0, -1.0, 6.0, 3.0])
 
-        result = mt.binned_map(signal, pixidx, 4)
-        self.assertTrue(np.allclose(reference_map, result),
-                        "reference = {0}, result = {1}".format(reference_map, result))
+        pixels, hits = mt.binned_map(signal, pixidx, 4)
+        self.assertTrue(np.allclose(reference_map, pixels),
+                        "reference = {0}, result = {1}".format(reference_map, pixels))
+        self.assertTrue(np.array_equal(np.array([2, 0, 3, 1]), hits))
