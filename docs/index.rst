@@ -15,6 +15,7 @@ Contents:
    instrument_configuration
    paramfile
    noisegen
+   timetools
    maptools
 
 

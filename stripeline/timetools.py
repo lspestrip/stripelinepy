@@ -16,8 +16,7 @@ def split_time_range(time_length: float,
                      time0=0.0) -> List[TimeChunk]:
     '''Split a time interval in a number of chunks.
 
-    Return a list of objects of kind TimeChunk. Each TimeChunk object is a
-    2-tuple of the form (START_TIME, NUM_OF_SAMPLES).
+    Return a list of objects of kind :class:`stripeline.timetools.TimeChunk`.
     '''
 
     delta_time = time_length / num_of_chunks
@@ -38,11 +37,22 @@ def split_time_range(time_length: float,
 class ToiProvider:
     '''Load a TOI and split it evenly among MPI processes.
 
-    This is an abstract base class, and it should not be instantiated. Consider
-    using any of its derived classes, like FitsToiProvider.'''
+    .. note:: This is an abstract base class, and it should not be instantiated.
+              Consider using any of its derived classes, like
+              :class:`stripeline.timetools.FitsToiProvider`.
+
+    In the case of a run split among many MPI processes, this class balances the
+    load of a long TOI. If every MPI process creates a
+    :class:`stripeline.timetools.ToiProvider` object, every object will take
+    responsibility of reading one section of the TOI. The methods
+    :func:`stripeline.timetools.ToiProvider.get_signal`,
+    :func:`stripeline.timetools.ToiProvider.get_pointings`, and
+    :func:`stripeline.timetools.ToiProvider.get_pixel_index` can be used by
+    processes to read the chunk of data which belongs to each.
+    '''
 
     def __init__(self, rank: int, num_of_processes: int):
-        '''Create a new ToiProvider object.
+        '''Create a new object.
 
         Parameters:
         * "rank" is the rank of the running MPI process
@@ -55,13 +65,25 @@ class ToiProvider:
     def get_signal(self):
         '''Return a vector containing the signal from the TOI.
 
-        Only the part of the TOI that belongs to the rank of this process is returned.
-        See the definition of ToiProvider.__init__'''
+        Only the part of the TOI that belongs to the rank of this process is
+        returned.'''
         return None
 
     def get_pixel_index(self):
-        'Return a vector containing the pixel index for each sample in the TOI.'
+        '''Return a vector containing the pixel index for each sample in the
+        TOI.
+
+        Only the part of the TOI that belongs to the rank of this process is
+        returned.'''
         return None
+
+    def get_pointings(self):
+        '''Return two vectors containing the colatitude and longitude for each
+        sample in the TOI.
+
+        Only the part of the TOI that belongs to the rank of this process is
+        returned.'''
+        return None, None
 
 
 ToiFile = namedtuple('ToiFile', ['file_name', 'num_of_samples'])
@@ -70,10 +92,7 @@ ToiFile = namedtuple('ToiFile', ['file_name', 'num_of_samples'])
 def read_fits_file_information(file_name: str, hdu=1) -> ToiFile:
     '''Read the number of rows in the first tabular HDU of a FITS file
 
-    Return a ToiFile object, which is a 3-tuple with the following named
-    fields:
-    - ``file_name``
-    - ``num_of_samples``
+    Return a :class:`stripeline.timetools.ToiFile` object.
     '''
     with fits.open(file_name) as fin:
         num_of_samples = fin[hdu].header['NAXIS2']
@@ -82,13 +101,14 @@ def read_fits_file_information(file_name: str, hdu=1) -> ToiFile:
 
 
 def split_into_n(length: int, num_of_segments: int) -> List[int]:
-    '''Split a set of "length" elements into "num_of_segments" subsets.
+    '''Split a set of `length` elements into `num_of_segments` subsets.
 
-    Example:
-    >>> split_into_n(10, 4)
-    [2 3 2 3]
-    >>> split_into_n(201, 2)
-    [100 101]
+    Example::
+
+        >>> split_into_n(10, 4)
+        [2 3 2 3]
+        >>> split_into_n(201, 2)
+        [100 101]
     '''
     assert num_of_segments > 0
     assert length > num_of_segments
@@ -106,11 +126,7 @@ def assign_toi_files_to_processes(samples_per_processes: List[int],
     files and samples must be loaded by each process, using the principle that
     all the processes should read the same number of files, when possible.
 
-    Return a list of ``ToiFile`` objects, which are 3-tuples containing the
-    following fields:
-    - ``file_name``
-    - ``first_element`` (starting from 0)
-    - ``num_of_elements``
+    Return a list of :class:`stripeline.timetools.ToiFile` objects.
     '''
 
     assert (sum(samples_per_processes) ==
@@ -160,8 +176,8 @@ ToiFileSegment = namedtuple(
 class FitsToiProvider(ToiProvider):
     '''Distribute a TOI saved in FITS files among MPI processes.
 
-    This class specializes ToiProvider in order to load the TOI from a set of
-    FITS files.'''
+    This class specializes :class:`stripeline.timetools.ToiProvider` in order to
+    load the TOI from a set of FITS files.'''
 
     def __init__(self,
                  rank: int,
