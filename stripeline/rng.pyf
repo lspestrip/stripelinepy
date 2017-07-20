@@ -84,10 +84,10 @@ interface
         intent(c) fill_vector_oof2
         intent(c)
 
-        integer(kind=4), intent(inout), dimension(4) :: state
+        integer(kind=4), dimension(4), intent(inout) :: state
         integer(kind=1), dimension(1), intent(inout) :: empty
         double precision, dimension(1), intent(inout) :: gset
-        double precision, dimension(5), intent(out) :: oof2_state
+        double precision, dimension(5), intent(inout) :: oof2_state
         double precision, dimension(num), intent(inout) :: array
         integer intent(hide), depend(array) :: num
     end subroutine fill_vector_oof2
@@ -132,10 +132,10 @@ interface
         intent(c) fill_vector_oof
         intent(c)
 
-        integer(kind=4), intent(inout), dimension(4) :: state
+        integer(kind=4), dimension(4), intent(inout) :: state
         integer(kind=1), dimension(1), intent(inout) :: empty
         double precision, dimension(1), intent(inout) :: gset
-        double precision, dimension(1), intent(inout) :: oof_state
+        double precision, dimension(:), intent(inout) :: oof_state
         integer(kind=4), intent(in) :: state_size
         double precision, dimension(num), intent(inout) :: array
         integer intent(hide), depend(array) :: num

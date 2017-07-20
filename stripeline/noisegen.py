@@ -73,7 +73,7 @@ class Oof2RNG:
 
     def fill_vector(self, array):
         'Fill the ``array`` vector with a sequence of pseudorandom numbers'
-        rng.fill_vector_oof2(self.state, self.empty, self.gset,
+        rng.fill_vector_oof2(self.flat_state, self.empty, self.gset,
                              self.oof2_state, array)
 
 
@@ -99,5 +99,5 @@ class OofRNG:
 
     def fill_vector(self, array):
         'Fill the ``array`` vector with a sequence of pseudorandom numbers'
-        rng.fill_vector_oof(self.state, self.empty, self.gset,
+        rng.fill_vector_oof(self.flat_state, self.empty, self.gset,
                             self.oof_state, self.num_of_states, array)

@@ -63,6 +63,14 @@ class TestFlatRNG(ut.TestCase):
             self.assertAlmostEqual(rng.next(), reference,
                                    msg='Reference #{0} does not match'.format(idx))
 
+    def test_identity_arr(self):
+        'Check that the generator produces a correct sequence of values'
+
+        rng = ng.FlatRNG()
+        result = np.empty(len(FLAT_REF_ARRAY))
+        rng.fill_vector(result)
+        self.assertTrue(np.allclose(result, FLAT_REF_ARRAY))
+
 
 class TestNormalRNG(ut.TestCase):
 
@@ -73,6 +81,14 @@ class TestNormalRNG(ut.TestCase):
         for idx, reference in enumerate(NORMAL_REF_ARRAY):
             self.assertAlmostEqual(rng.next(), reference,
                                    msg='Reference #{0} does not match'.format(idx))
+
+    def test_identity_arr(self):
+        'Check that the generator produces a correct sequence of values'
+
+        rng = ng.NormalRNG()
+        result = np.empty(len(NORMAL_REF_ARRAY))
+        rng.fill_vector(result)
+        self.assertTrue(np.allclose(result, NORMAL_REF_ARRAY))
 
 
 class TestOof2RNG(ut.TestCase):
@@ -85,6 +101,14 @@ class TestOof2RNG(ut.TestCase):
             self.assertAlmostEqual(rng.next(), reference,
                                    msg='Reference #{0} does not match'.format(idx))
 
+    def test_identity_arr(self):
+        'Check that the generator produces a correct sequence of values'
+
+        rng = ng.Oof2RNG(**OOF2_REF_PARAMS)
+        result = np.empty(len(OOF2_REF_ARRAY))
+        rng.fill_vector(result)
+        self.assertTrue(np.allclose(result, OOF2_REF_ARRAY))
+
 
 class TestOofRNG(ut.TestCase):
 
@@ -95,6 +119,14 @@ class TestOofRNG(ut.TestCase):
         for idx, reference in enumerate(OOF_REF_ARRAY):
             self.assertAlmostEqual(rng.next(), reference,
                                    msg='Reference #{0} does not match'.format(idx))
+
+    def test_identity_arr(self):
+        'Check that the generator produces a correct sequence of values'
+
+        rng = ng.OofRNG(**OOF_REF_PARAMS)
+        result = np.empty(len(OOF_REF_ARRAY))
+        rng.fill_vector(result)
+        self.assertTrue(np.allclose(result, OOF_REF_ARRAY))
 
 
 if __name__ == '__main__':
