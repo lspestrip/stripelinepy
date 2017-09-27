@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 
 from collections import namedtuple
-from typing import List
+from typing import List, Union
 import numpy as np
 from astropy.io import fits
 
@@ -34,6 +34,13 @@ def split_time_range(time_length: float,
     return result
 
 
+DET_NAMES = {'Q1': 0,
+             'Q2': 1,
+             'U1': 2,
+             'U2': 3
+             }
+
+
 class ToiProvider:
     '''Load a TOI and split it evenly among MPI processes.
 
@@ -62,20 +69,34 @@ class ToiProvider:
         self.num_of_processes = num_of_processes
         self.total_num_of_samples = 0
 
-    def get_signal(self):
+    def get_signal(self, det_idx: Union[int, str]):
         '''Return a vector containing the signal from the TOI.
+
+        Parameters:
+
+        * "det_idx" is the index of the detector:
+            - 0: Q1
+            - 1: Q2
+            - 2: U1
+            - 3: U2
+          Optionally, the strings ``Q1``, ``Q2``, ``U1``, and ``U2`` can be used.
 
         Only the part of the TOI that belongs to the rank of this process is
         returned.'''
+
+        # Unused
+        del det_idx
         return None
 
-    def get_pixel_index(self):
+    def get_pixel_index(self, nside: int, nest=False, lonlat=False):
         '''Return a vector containing the pixel index for each sample in the
         TOI.
 
         Only the part of the TOI that belongs to the rank of this process is
         returned.'''
-        return None
+
+        theta, phi, psi = self.get_pointings()
+        return healpy.ang2pix(XXX, theta, phi)
 
     def get_pointings(self):
         '''Return two vectors containing the colatitude and longitude for each
@@ -119,18 +140,18 @@ def split_into_n(length: int, num_of_segments: int) -> List[int]:
 
 
 def assign_toi_files_to_processes(samples_per_processes: List[int],
-                                  fits_files: List[ToiFile]):
+                                  tod_files: List[ToiFile]):
     '''Determine how to balance the load of TOI files among processes.
 
     Given a list of samples to be processed by each MPI process, decide which
-    files and samples must be loaded by each process, using the principle that
-    all the processes should read the same number of files, when possible.
+    TOD and samples must be loaded by each process, using the principle that
+    all the processes should read the same number of TODs, when possible.
 
     Return a list of :class:`stripeline.timetools.ToiFile` objects.
     '''
 
     assert (sum(samples_per_processes) ==
-            sum([x.num_of_samples for x in fits_files]))
+            sum([x.num_of_samples for x in tod_files]))
 
     result = []  # Type: List[List[ToiFile]]
 
@@ -144,11 +165,11 @@ def assign_toi_files_to_processes(samples_per_processes: List[int],
         elements_in_this_segment = 0
         # Iterate over the files to be read by the current MPI process
         while elements_in_this_segment < samples_in_this_proc:
-            if fits_files[file_idx].num_of_samples - element_idx <= samples_in_this_proc:
+            if tod_files[file_idx].num_of_samples - element_idx <= samples_in_this_proc:
                 # The whole FITS file is going to be read by the current MPI
                 # process
-                num = fits_files[file_idx].num_of_samples - element_idx
-                segments.append(ToiFileSegment(file_name=fits_files[file_idx].file_name,
+                num = tod_files[file_idx].num_of_samples - element_idx
+                segments.append(ToiFileSegment(file_name=tod_files[file_idx].file_name,
                                                first_element=element_idx,
                                                num_of_elements=num))
                 elements_in_this_segment += num
@@ -158,7 +179,7 @@ def assign_toi_files_to_processes(samples_per_processes: List[int],
                 # This is the size of the segment we're going to append to "segments"
                 num = samples_in_this_proc - elements_in_this_segment
                 # Only a subset of this FITS file will be read by the current MPI process
-                segments.append(ToiFileSegment(file_name=fits_files[file_idx].file_name,
+                segments.append(ToiFileSegment(file_name=tod_files[file_idx].file_name,
                                                first_element=element_idx,
                                                num_of_elements=num))
                 elements_in_this_segment += num
@@ -172,6 +193,15 @@ def assign_toi_files_to_processes(samples_per_processes: List[int],
 ToiFileSegment = namedtuple(
     'ToiFileSegment', ['file_name', 'first_element', 'num_of_elements'])
 
+FitsColumn = namedtuple(
+    'FitsColumn', ['hdu', 'column']
+)
+
+FitsTableLayout = namedtuple(
+    'FitsTableLayout', ['time_col', 'theta_col',
+                        'phi_col', 'psi_col', 'signal_cols']
+)
+
 
 class FitsToiProvider(ToiProvider):
     '''Distribute a TOI saved in FITS files among MPI processes.
@@ -183,9 +213,11 @@ class FitsToiProvider(ToiProvider):
                  rank: int,
                  num_of_processes: int,
                  file_names: List[str],
+                 file_layout: FitsTableLayout,
                  comm=None):
         ToiProvider.__init__(self, rank, num_of_processes)
 
+        self.file_layout = file_layout
         self.fits_files = []  # Type: List[ToiFile]
         if rank == 0 or comm is None:
             for cur_file in file_names:
@@ -203,6 +235,38 @@ class FitsToiProvider(ToiProvider):
             assign_toi_files_to_processes(self.samples_per_process,
                                           self.fits_files)
 
-    def get_signal(self):
-        # TODO: implement me!
-        return None
+    def get_signal(self, det_idx: Union[int, str]):
+        '''Return a vector containing the signal from the TOI.
+
+        Parameters:
+
+        * det_idx is either the number of the detector or its name, with the following
+          associations:
+
+          - 0: ``Q1``
+          - 1: ``Q2``
+          - 2: ``U1``
+          - 3: ``U2``
+
+        Only the part of the TOI that belongs to the rank of this process is
+        returned.'''
+
+        if det_idx is str:
+            det_idx = DET_NAMES[det_idx]
+
+        col_to_read = self.file_layout.signal_cols[det_idx]
+        result = np.array([], dtype=np.float64)
+        for cur_segment in self.segments_per_process[self.rank]:
+            with fits.open(cur_segment.file_name) as f:
+                vec = f[col_to_read.hdu].data.get_field(col_to_read.column)
+                result = np.concatenate([result, vec])
+
+        return result
+
+    def get_pointings(self):
+        '''Return two vectors containing the colatitude and longitude for each
+        sample in the TOI.
+
+        Only the part of the TOI that belongs to the rank of this process is
+        returned.'''
+        return None, None
