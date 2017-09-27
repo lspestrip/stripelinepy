@@ -69,21 +69,14 @@ class ToiProvider:
         self.num_of_processes = num_of_processes
         self.total_num_of_samples = 0
 
+    def get_time(self):
+        '''Return a vector containing the time of each sample in the TOI.
+
+        Only the part of the TOI that belongs to the rank of this process
+        is returned.'''
+        return None
+
     def get_signal(self, det_idx: Union[int, str]):
-        '''Return a vector containing the signal from the TOI.
-
-        Parameters:
-
-        * "det_idx" is the index of the detector:
-            - 0: Q1
-            - 1: Q2
-            - 2: U1
-            - 3: U2
-          Optionally, the strings ``Q1``, ``Q2``, ``U1``, and ``U2`` can be used.
-
-        Only the part of the TOI that belongs to the rank of this process is
-        returned.'''
-
         # Unused
         del det_idx
         return None
@@ -96,7 +89,7 @@ class ToiProvider:
         returned.'''
 
         theta, phi, psi = self.get_pointings()
-        return healpy.ang2pix(XXX, theta, phi)
+        return healpy.ang2pix(nside, theta, phi, nest=nest, lonlat=lonlat)
 
     def get_pointings(self):
         '''Return two vectors containing the colatitude and longitude for each
@@ -105,6 +98,15 @@ class ToiProvider:
         Only the part of the TOI that belongs to the rank of this process is
         returned.'''
         return None, None
+
+    def get_polarization_angle(self):
+        '''Return a vector containing the polarization angle for each sample
+        in the TOI.
+
+        Only the part of the TOI that belongs to the rank of this process is
+        returned.'''
+
+        return None
 
 
 ToiFile = namedtuple('ToiFile', ['file_name', 'num_of_samples'])
@@ -165,7 +167,7 @@ def assign_toi_files_to_processes(samples_per_processes: List[int],
         elements_in_this_segment = 0
         # Iterate over the files to be read by the current MPI process
         while elements_in_this_segment < samples_in_this_proc:
-            if tod_files[file_idx].num_of_samples - element_idx <= samples_in_this_proc:
+            if elements_in_this_segment + (tod_files[file_idx].num_of_samples - element_idx) <= samples_in_this_proc:
                 # The whole FITS file is going to be read by the current MPI
                 # process
                 num = tod_files[file_idx].num_of_samples - element_idx
@@ -203,6 +205,31 @@ FitsTableLayout = namedtuple(
 )
 
 
+def _load_array_from_fits(segments: List[ToiFileSegment], cols_to_read: List[FitsColumn]):
+    '''Read a set of columns from a list of FITS files.
+
+    The chunks to read from each FITS file are specified in the parameter `segments`,
+    while the columns to read are in `cols_to_read`. The function returns a tuple
+    containing all the data from the columns (each in a NumPy array) in the same
+    order as in `cols_to_read`.'''
+
+    arrays = [np.array([], dtype=np.float64) for i in range(len(cols_to_read))]
+    for cur_segment in segments:
+        start = cur_segment.first_element
+        end = cur_segment.first_element + cur_segment.num_of_elements
+        with fits.open(cur_segment.file_name) as f:
+            # TODO: maybe this is not the most efficient way to load
+            # chunks of data from a FITS column
+            cur_chunk_arr = [f[x.hdu].data.field(x.column)[start:end]
+                             for x in cols_to_read]
+
+            for col_idx in range(len(cols_to_read)):
+                arrays[col_idx] = np.concatenate(
+                    [arrays[col_idx], cur_chunk_arr[col_idx]])
+
+    return tuple(arrays)
+
+
 class FitsToiProvider(ToiProvider):
     '''Distribute a TOI saved in FITS files among MPI processes.
 
@@ -231,9 +258,18 @@ class FitsToiProvider(ToiProvider):
         self.samples_per_process = split_into_n(self.total_num_of_samples,
                                                 num_of_processes)
 
-        self.segments_per_process = \
-            assign_toi_files_to_processes(self.samples_per_process,
-                                          self.fits_files)
+        self.segments_per_process = assign_toi_files_to_processes(self.samples_per_process,
+                                                                  self.fits_files)
+
+    def get_time(self):
+        '''Return a vector containing the time of each sample in the TOI.
+
+        Only the part of the TOI that belongs to the rank of this process
+        is returned.'''
+
+        result = _load_array_from_fits(segments=self.segments_per_process[self.rank],
+                                       cols_to_read=[self.file_layout.time_col])
+        return result[0]
 
     def get_signal(self, det_idx: Union[int, str]):
         '''Return a vector containing the signal from the TOI.
@@ -251,17 +287,13 @@ class FitsToiProvider(ToiProvider):
         Only the part of the TOI that belongs to the rank of this process is
         returned.'''
 
-        if det_idx is str:
+        if type(det_idx) is str:
             det_idx = DET_NAMES[det_idx]
 
-        col_to_read = self.file_layout.signal_cols[det_idx]
-        result = np.array([], dtype=np.float64)
-        for cur_segment in self.segments_per_process[self.rank]:
-            with fits.open(cur_segment.file_name) as f:
-                vec = f[col_to_read.hdu].data.get_field(col_to_read.column)
-                result = np.concatenate([result, vec])
+        result = _load_array_from_fits(segments=self.segments_per_process[self.rank],
+                                       cols_to_read=[self.file_layout.signal_cols[det_idx]])
 
-        return result
+        return result[0]
 
     def get_pointings(self):
         '''Return two vectors containing the colatitude and longitude for each
@@ -269,4 +301,20 @@ class FitsToiProvider(ToiProvider):
 
         Only the part of the TOI that belongs to the rank of this process is
         returned.'''
-        return None, None
+
+        theta, phi = _load_array_from_fits(segments=self.segments_per_process[self.rank],
+                                           cols_to_read=[self.file_layout.theta_col,
+                                                         self.file_layout.phi_col])
+
+        return theta, phi
+
+    def get_polarization_angle(self):
+        '''Return two vectors containing the colatitude and longitude for each
+        sample in the TOI.
+        Only the part of the TOI that belongs to the rank of this process is
+        returned.'''
+
+        psi = _load_array_from_fits(segments=self.segments_per_process[self.rank],
+                                    cols_to_read=[self.file_layout.psi_col])
+
+        return psi
