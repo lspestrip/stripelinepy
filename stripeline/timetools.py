@@ -317,4 +317,4 @@ class FitsToiProvider(ToiProvider):
         psi = _load_array_from_fits(segments=self.segments_per_process[self.rank],
                                     cols_to_read=[self.file_layout.psi_col])
 
-        return psi
+        return psi[0]
