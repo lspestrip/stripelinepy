@@ -14,6 +14,7 @@ Contents:
    math_conventions
    instrument_configuration
    paramfile
+   polarization
    noisegen
    timetools
    maptools
