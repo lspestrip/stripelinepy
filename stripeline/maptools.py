@@ -4,32 +4,35 @@
 '''Map-related facilities
 '''
 
-from typing import Any, List
-
-from collections import namedtuple
+from typing import Any
 
 import stripeline._maptools as _m
+import stripeline.timetools as tt
+import stripeline.polarization as pol
 import numpy as np
-from mpi4py import MPI
+import healpy
 
 
 class ConditionMatrix:
     '''Compute the inverse condition number for pixels in a map
 
     This class computes the inverse condition number of the pixels in a map,
-    given one or more streams of samples taken from TODs. Condition numbers
-    are useful to quantify how well map-makers are able to derive the I/Q/U
+    given one or more streams of samples taken from TODs. Condition numbers are
+    useful to quantify how well map-makers are able to derive the I/Q/U
     components of the sky signal. This class computes the *inverse* condition
     numbers, which is the most widely used approach: condition numbers range
     from 1 (best case, perfect I/Q/U reconstruction) to infinity (worst case),
     while inverse condition numbers range from 0 (no possibility to disentangle
     I/Q/U) to 1 (best case).
 
-    A typical usage of this class is to create an object and repeatedly call
-    the :func:`ConditionMatrix.update` method with part of all the samples
-    in the TOD. When all the TODs have been processed, the function
-    :func:`ConditionMatrix.to_map` can be used to trigger the computation
-    of the condition numbers and produce a map.
+    A typical usage of this class is to create an object and repeatedly call the
+    :func:`ConditionMatrix.update` method with part of all the samples in the
+    TOD. When all the TODs have been processed, the function
+    :func:`ConditionMatrix.to_map` can be used to trigger the computation of the
+    condition numbers and produce a map.
+
+    Note that inverse condition number are not useful for STRIP, since its
+    polarimeters directly measure Q and U.
     '''
 
     def __init__(self, numpix: int):
@@ -93,11 +96,11 @@ def nonoise_map(signal, pixidx, num_of_pixels):
     mappixels = np.zeros(num_of_pixels)
     observed = np.zeros(num_of_pixels, dtype='bool')
 
-    for i in range(len(signal)):
-        cur_pixel_pos = pixidx[i]
-        if not observed[cur_pixel_pos]:
-            mappixels[cur_pixel_pos] = signal[i]
-            observed[cur_pixel_pos] = True
+    for idx, cur_signal in enumerate(signal):
+        cur_pixidx = pixidx[idx]
+        if not observed[cur_pixidx]:
+            mappixels[cur_pixidx] = cur_signal
+            observed[cur_pixidx] = True
 
     return mappixels
 
@@ -147,3 +150,61 @@ def binned_map(signal, pixidx, num_of_pixels):
     _m.binned_map(signal, pixidx, mappixels, hits)
 
     return mappixels, hits
+
+
+def binned_map_strip(nside: int, toi_provider: tt.ToiProvider, comm=None):
+    '''Compute a sky map from a set of TOI using a binning algorithm.
+
+    Read the TOI using ``toi_provider`` and produce maps with their
+    resolution specified by ``nside``.
+
+    This function is based on :func:`binned_map`, but it assumes that the
+    TOIs contain data acquired by a STRIP polarimeter. Therefore, it is
+    able to return both temperature and polarization maps. The following
+    information is extracted from the TOIs:
+
+    - Pixel index of the samples;
+    - Q1, Q2, U1, U2 samples (assuming they have been measured in the
+      reference frame of the *instrument*);
+    - Polarization angle psi, used to convert Q, U pairs from the reference
+      frame of the instrument to the celestial reference frame.
+
+    Return a tuple containing the I, Q, U, and hits maps.'''
+
+    signals = np.array([toi_provider.get_signal(i) for i in range(4)])
+
+    # Compute Q and U and transform them in the celestial reference frame
+    q_cel, u_cel = pol.rotate_qu(q_from=2.0 * (signals[0, :] + signals[1, :]),
+                                 u_from=2.0 * (signals[2, :] + signals[3, :]),
+                                 psi=toi_provider.get_polarization_angle(),
+                                 inverse=True)
+
+    # Compute the local maps
+    npix = healpy.nside2npix(nside)
+    pixidx = toi_provider.get_pixel_index(nside=nside)
+    local_i, local_hits = binned_map(signal=np.sum(signals, axis=0),
+                                     pixidx=pixidx,
+                                     num_of_pixels=npix)
+    local_q, local_hits = binned_map(signal=q_cel,
+                                     pixidx=pixidx,
+                                     num_of_pixels=npix)
+    local_u, local_hits = binned_map(signal=u_cel,
+                                     pixidx=pixidx,
+                                     num_of_pixels=npix)
+
+    if comm:
+        # Combine the maps produced by each MPI process
+        global_hits = comm.allreduce(local_hits)
+
+        global_i = comm.allreduce(local_i * local_hits)
+        global_q = comm.allreduce(local_q * local_hits)
+        global_u = comm.allreduce(local_u * local_hits)
+
+        # Normalize by the number of hits
+        mask = global_hits > 0
+        for cur_map in (global_i, global_q, global_u):
+            cur_map[mask] /= global_hits[mask]
+
+        return (global_i, global_q, global_u, global_hits)
+
+    return (local_i, local_q, local_u, local_hits)
