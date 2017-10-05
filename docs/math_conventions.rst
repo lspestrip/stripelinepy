@@ -28,6 +28,33 @@ products uniquely define the coordinate system:
 Convention for measuring polarization
 -------------------------------------
 
+Polarization angles
++++++++++++++++++++
+
+
+Polarization measurements in the CMB world are usually done using the I, Q, U,
+and V `Stokes parameters <https://en.wikipedia.org/wiki/Stokes_parameters>`_,
+which require to fix a reference frame. There are two reference frames used in
+Stripeline:
+
+1. The reference frame of the focal plane is assumed in TOI files. In this case,
+   the polarization angle is zero when it is pointing along the direction from
+   detector ``I3`` to detector ``I6`` (see image below). It increases
+   counterclockwise, and it is always measured in radians.
+
+.. image:: strip_focal_plane_plot.svg
+
+2. The celestial reference frame assumes that a polarization angle is zero when
+   it is aligned along the direction from the South Celestial Pole to the North
+   Celestial Pole.
+
+   In this case too, the angle is measured counterclockwise (thus following
+   the order North-NW-West-SW-South-SE-East-NE), and it is measured in radians.
+
+
+Polarization in the celestial reference frame
++++++++++++++++++++++++++++++++++++++++++++++
+
 Traditionally, the CMB community has always used the COSMO convention
 for defining polarization angles and Stokes vector. This conflicted
 with the convention used by the International Astronomical Union
@@ -45,3 +72,4 @@ See also the `Healpix documentation
 like `anafast` do not like the IAU convention, and they will crash
 when dealing with this kind of files. Stripeline is immune to such
 deficiency.
+
