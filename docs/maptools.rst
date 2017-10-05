@@ -11,8 +11,10 @@ Here is an overview of the tools provided by this submodule:
 
 - :func:`binned_map` bins a map, assuming only uncorrelated noise.
 
-The functions implemented in this code are still not able to take advantage of
-MPI.
+- :func:`binned_map_strip` bins a map from TOI acquired using STRIP-like
+  polarimeters (i.e., able to measure I, Q, and U at the same time). It uses MPI
+  to distribute the computation among a set of computation nodes.
+
 
 Documentation
 -------------
