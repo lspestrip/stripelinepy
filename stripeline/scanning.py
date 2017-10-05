@@ -5,11 +5,11 @@
 
 We call *scanning strategy* the way the instrument changes its orientation
 towards the sky with the passing of time. It is encoded as a set of times and
-sky coordinates, and it depends on the way the Earth rotates and the 
-instrument wheels are operated. 
+sky coordinates, and it depends on the way the Earth rotates and the
+instrument wheels are operated.
 
 Stripeline offers a set of utilities to generate a scanning strategy, given
-a set of instrumental parameters. These are used to determine which 
+a set of instrumental parameters. These are used to determine which
 configuration has the most desirable properties in terms of the scientific
 outcome (sky coverage, integration time per pixel, etc.).
 
@@ -22,9 +22,9 @@ Here is a short example which shows how to use these facilities::
 
     import stripeline.scanning as sc
 
-    def save_tod(pointings, 
+    def save_tod(pointings,
                  scanning: sc.ScanningStrategy,
-                 dir_vec, 
+                 dir_vec,
                  index: int):
         # Here you can save/use "pointings", which is a 4xn matrix
         pass
@@ -33,10 +33,10 @@ Here is a short example which shows how to use these facilities::
                                    latitude_deg=28.3,
                                    overall_time_s=3600.0,
                                    sampling_frequency_hz=50.0)
-    generate_pointings(scanning=scanning,
-                       dir_vec=[0., 0., 1.],
-                       num_of_chunks=1,
-                       tod_callback=save_tod)
+    sc.generate_pointings(scanning=scanning,
+                          dir_vec=[0., 0., 1.],
+                          num_of_chunks=1,
+                          tod_callback=save_tod)
 
 This module provides the class :class:`~stripeline.scanning.TodWriter`, which
 saves pointing information in FITS files.
@@ -60,19 +60,19 @@ import stripeline.timetools as timetools
 class ScanningStrategy:
     '''Parameters of a sky scanning strategy.
 
-    This class holds together a number of information needed to define a 
+    This class holds together a number of information needed to define a
     strategy to scan the sky. It works like a named tuple, but it allows
     members to be changed after the object has been created.
 
     The following parameters are accepted:
 
-    - `wheel1_rpm`: rotations per minute of the first wheel 
+    - `wheel1_rpm`: rotations per minute of the first wheel
         (focal plane wheel);
-    - `wheel3_rpm`: rotations per minute of the third wheel 
+    - `wheel3_rpm`: rotations per minute of the third wheel
         (ground wheel, also called «azimuth wheel»);
-    - `wheel1_angle0_deg`: angle of the first wheel when the simulation 
+    - `wheel1_angle0_deg`: angle of the first wheel when the simulation
         starts (degrees);
-    - `wheel2_angle0_deg`: angle of the second wheel (elevation wheel) 
+    - `wheel2_angle0_deg`: angle of the second wheel (elevation wheel)
         when the simulation starts (degrees);
     - `wheel3_angle0_deg`: angle of the third wheel when the simulation
         starts (degrees);
@@ -80,7 +80,7 @@ class ScanningStrategy:
     - `overall_time_s`: overall duration of the observation (in seconds);
     - `sampling_frequency_hz`: sampling frequency of the detector (in Hz).
 
-     The class implements YAML serialization through the methods 
+     The class implements YAML serialization through the methods
      :meth:`~stripeline.scanning.ScanningStrategy.load` and
      :meth:`~stripeline.scanning.ScanningStrategy.save`.'''
 
@@ -152,7 +152,7 @@ class ScanningStrategy:
 
     def load(self, input):
         '''Build a :class:`ScanningStrategy` object from its YAML representation.
-        
+
         The parameter "input" can either be a file object, a dictionary or a string.'''
         if isinstance(input, dict):
             d = input
@@ -242,7 +242,7 @@ def generate_pointings(scanning: ScanningStrategy,
         location_quat = np.reshape(
             np.tile(
                 q.qfromaxisangle(
-                    [x_vec], [-np.deg2rad(90.0 - scanning.latitude_deg)]),
+                    [x_vec], [np.deg2rad(90.0 - scanning.latitude_deg)]),
                 time_vec.size), (-1, 4))
         earth_rot_quat = q.qfromaxisangle(tile_z,
                                           2 * np.pi * time_vec / 86400.0)
@@ -257,7 +257,14 @@ def generate_pointings(scanning: ScanningStrategy,
         northdir = np.column_stack((-np.cos(thetapol) * np.cos(phipol),
                                     -np.cos(thetapol) * np.sin(phipol),
                                     np.sin(thetapol)))
-        psi = np.arccos(np.sum(northdir * poldirs, axis=1))
+
+        # The counterclockwise/clockwise measurement of the polarization angle
+        # is determined by the ordering of the terms in the call to "np.cross"
+        cos_psi = np.clip(np.sum(northdir * poldirs, axis=1), -1.0, 1.0)
+        cross = np.cross(northdir, poldirs)
+        sin_psi = np.clip(np.sum(cross * cross, axis=1), -1.0, 1.0)
+        psi = np.arctan2(sin_psi, cos_psi)
+        psi *= np.sign(np.sum(cross * dirs, axis=1))
 
         if tod_callback is not None:
             tod_callback(pointings=np.column_stack((time_vec, theta, phi, psi)),
@@ -272,15 +279,15 @@ class TodWriter:
     This class has been designed to be used together with
     :meth:`~stripeline.scanning.generate_pointings`.
 
-    You create an instance of the object and then pass it to 
+    You create an instance of the object and then pass it to
     :meth:`~stripeline.scanning.generate_pointings`, like in the following way::
 
-        writer = TodWriter(outdir='/storage', 
+        writer = TodWriter(outdir='/storage',
                            file_name_mask='mytod_{index:04d}.fits.gz')
         generate_pointings(..., tod_callback=writer)
 
     As you can see, you can use the `index` key in the `file_name_mask`
-    parameter to separate the files in chunks. The number of times `writer` is 
+    parameter to separate the files in chunks. The number of times `writer` is
     called depends on the parameter `num_of_chunks` passed to
     :meth:`~stripeline.scanning.generate_pointings`.
     '''
@@ -452,6 +459,7 @@ def main(output_path, input_file, wheel1_rpm, wheel3_rpm, wheel1_angle0, wheel2_
                        dir_vec=direction,
                        num_of_chunks=num_of_chunks,
                        tod_callback=writer)
+
 
 if __name__ == '__main__':
     main()
