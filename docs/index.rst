@@ -16,6 +16,7 @@ Contents:
    paramfile
    polarization
    noisegen
+   scanning
    timetools
    maptools
 

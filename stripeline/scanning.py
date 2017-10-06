@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
 # -*- encoding: utf-8 -*-
 
-'''Functions to simulate the observation of the sky through the year.
+'''Functions to quickly simulate the observation of the sky through the year.
 
 We call *scanning strategy* the way the instrument changes its orientation
 towards the sky with the passing of time. It is encoded as a set of times and
-sky coordinates, and it depends on the way the Earth rotates and the
-instrument wheels are operated.
+sky coordinates, and it depends on the way the Earth rotates and the instrument
+wheels are operated.
 
-Stripeline offers a set of utilities to generate a scanning strategy, given
-a set of instrumental parameters. These are used to determine which
-configuration has the most desirable properties in terms of the scientific
-outcome (sky coverage, integration time per pixel, etc.).
+Stripeline offers a set of utilities to generate a scanning strategy, given a
+set of instrumental parameters. These are used to determine which configuration
+has the most desirable properties in terms of the scientific outcome (sky
+coverage, integration time per pixel, etc.).
 
 The function which creates pointing information from a description of the
 scanning strategy is :meth:`~stripeline.scanning.generate_pointings`, which
-depends on the class
-:class:`~stripeline.scanning.ScanningStrategy`.
+depends on the class :class:`~stripeline.scanning.ScanningStrategy`. This
+function is `quick`, in the sense that it does not take into account many
+time-dependent effects (like the nutation of the Earth's axis), it just models
+the Earth as a sphere rotating around a fixed axis with constant angular
+velocity. To make a more realistic simulation, see Sect.
+:ref:`accurate-generation-of-pointing-timelines`.
 
 Here is a short example which shows how to use these facilities::
 
@@ -30,6 +34,7 @@ Here is a short example which shows how to use these facilities::
         pass
 
     scanning = sc.ScanningStrategy(wheel3_rpm=1.0,
+                                   wheel2_angle0_deg=45.0,
                                    latitude_deg=28.3,
                                    overall_time_s=3600.0,
                                    sampling_frequency_hz=50.0)
