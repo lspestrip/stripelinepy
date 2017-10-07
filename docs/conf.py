@@ -13,18 +13,6 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-
-import sys
-from nittest.mock import MagicMock
-
-class Mock(MagicMock):
-    @classmethod
-    def __getattr__(cls, name):
-        return MagicMock()
-    
-MOCK_MODULES = ['click', 'numpy', 'scipy', 'healpy', 'mpi4py']
-sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES) 
-    
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join('..')))
