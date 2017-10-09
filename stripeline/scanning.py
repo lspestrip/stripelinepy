@@ -190,24 +190,26 @@ def time_to_rot_angle(time_vec: Any, rpm: float) -> Any:
 def generate_pointings(scanning: ScanningStrategy,
                        dir_vec=[0, 0, 1],
                        num_of_chunks=1,
-                       tod_callback=None):
+                       tod_callback=None,
+                       time0_s=0.0):
     '''Generate a set of pointing directions.
 
-    Simulate the scanning of the sky with the parameters provided in
-    `scanning`, `dir_vec`. The `tod_callback` parameter is a function
-    which is called whenever a new chunk of samples has been calculated.
-    (It is fine if it is set to ``None``: in this case, pointings will
-    be silently thrown away once they have been computed.)
+    Simulate the scanning of the sky with the parameters provided in `scanning`,
+    `dir_vec`. The `tod_callback` parameter is a function which is called
+    whenever a new chunk of samples has been calculated. (It is fine if it is
+    set to ``None``: in this case, pointings will be silently thrown away once
+    they have been computed.) The value `time0_s` specifies the time of the
+    first sample.
 
     The callback must accept the following parameters:
 
-    - `pointings`: 4xn matrix containing the time (in seconds),
-      colatitude (in radians), longitude (ditto), and polarization angle
-      (ditto), each in its own column;
+    - `pointings`: 4xn matrix containing the time (in seconds), colatitude (in
+      radians), longitude (ditto), and polarization angle (ditto), each in its
+      own column;
     - `scanning`: copy of the parameter passed to this function;
     - `dir_vec`: copy of the parameter passed to this function;
-    - `index`: counter which keeps track of how many times the
-      callback has been called, starting from 0.
+    - `index`: counter which keeps track of how many times the callback has been
+      called, starting from 0.
     '''
     x_vec = np.array([1, 0, 0])
     z_vec = np.array([0, 0, 1])
@@ -215,7 +217,7 @@ def generate_pointings(scanning: ScanningStrategy,
     chunks = timetools.split_time_range(time_length=scanning.overall_time_s,
                                         num_of_chunks=num_of_chunks,
                                         sampfreq=scanning.sampling_frequency_hz,
-                                        time0=0.0)
+                                        time0=time0_s)
     for chunk_idx, cur_chunk in enumerate(chunks):
         start_time, samples_per_chunk = cur_chunk
 
