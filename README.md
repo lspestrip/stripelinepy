@@ -53,8 +53,16 @@ and run all the tests automatically:
 
 # Documentation
 
-The documentation is hosted on [ReadTheDocs](http://stripeline.readthedocs.io) and
-rebuilt automatically every time the `master` branch is updated.
+You need [Sphinx](https://pypi.python.org/pypi/Sphinx) to build the documentation.
+
+Once you have Sphinx, you can build a copy of the documentation locally using the
+following commands:
+
+    cd docs
+    make html
+
+The index of the generated documentation will be available in
+`docs/_build/html/index.html`.
 
 
 # License
