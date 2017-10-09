@@ -179,3 +179,10 @@ The details of the scanning strategy are stored in the YAML file
 <https://github.com/lspestrip/stripeline/instrument/scanning_strategy.yaml>`_.
 See the section :ref:`scanning-the-sky` for more information about how to use
 this file to produce timelines.
+
+
+Access to the instrument database
+---------------------------------
+
+.. automodule:: stripeline.instrumentdb
+                :members:
