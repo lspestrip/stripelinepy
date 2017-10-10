@@ -10,8 +10,11 @@ import stripeline.instrumentdb as idb
 
 class TestInstrumentDb(ut.TestCase):
     def test_paths(self):
-        self.assertTrue(os.path.exists(idb.instrument_db_path()))
+        self.assertTrue(os.path.exists(idb.instrument_db_path()),
+                        'Path "{0}" not found'.format(idb.instrument_db_path()))
 
-        self.assertTrue(os.path.exists(idb.focal_plane_db_file_name()))
-        self.assertTrue(os.path.exists(idb.detector_db_file_name()))
-        self.assertTrue(os.path.exists(idb.scanning_strategy_db_file_name()))
+        for file_name in (idb.focal_plane_db_file_name(),
+                          idb.detector_db_file_name(),
+                          idb.scanning_strategy_db_file_name()):
+            self.assertTrue(os.path.exists(file_name),
+                            'File "{0}" not found'.format(file_name))
