@@ -43,3 +43,23 @@ class TestScanning(ut.TestCase):
         self.assertTrue(np.allclose(storage.psi, np.deg2rad([
             -90.0, 0.0, 90.0, 180.0
         ])))
+
+
+    def test_dir_vec(self):
+        # Checks that bug #11 does not appear again
+        storage = PointingStorage()
+        scanning = sc.ScanningStrategy(wheel1_rpm=0.0,
+                                       wheel3_rpm=60.0,
+                                       wheel1_angle0_deg=0.0,
+                                       wheel2_angle0_deg=0.0,
+                                       wheel3_angle0_deg=0.0,
+                                       latitude_deg=0.0,  # Equator
+                                       overall_time_s=1.0,
+                                       sampling_frequency_hz=4.0)
+
+        sc.generate_pointings(scanning=scanning, dir_vec=[1, 0, 0],
+                              num_of_chunks=1, tod_callback=storage)
+
+        self.assertTrue(np.allclose(storage.theta, np.deg2rad([
+            90.0, 0.0, 90.0, 180.0
+        ])), "theta is {0}".format(storage.theta))
