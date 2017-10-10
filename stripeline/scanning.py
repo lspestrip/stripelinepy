@@ -254,7 +254,7 @@ def generate_pointings(scanning: ScanningStrategy,
         earth_rot_quat = q.qfromaxisangle(tile_z,
                                           2 * np.pi * time_vec / 86400.0)
         quat = q.qmul(earth_rot_quat, q.qmul(location_quat, ground_quat))
-        dirs = q.qrotate(tile_z, quat)
+        dirs = q.qrotate(tile_dir, quat)
         poldirs = q.qrotate(tile_x, quat)
         theta, phi = healpy.vec2ang(dirs)
 
