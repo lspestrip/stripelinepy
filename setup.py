@@ -48,6 +48,11 @@ def configuration(parent_package='', top_path=None):
                             long_description=read('README.md'),
                             py_modules=['stripeline/stripsim'],
                             requires=['numpy', 'pyyaml', 'healpy'],
+                            data_files=[('instrument', [
+                                'instrument/scanning_strategy.yaml',
+                                'instrument/strip_detectors.yaml',
+                                'instrument/strip_focal_plane.yaml',
+                            ])],
                             ext_modules=extensions)
     return config.todict()
 
