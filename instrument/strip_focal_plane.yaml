@@ -36,7 +36,7 @@ horns:
         color: indigo
         fwhm_x_deg: 0.347
         fwhm_y_deg: 0.344
-        ellipticity: 1.008,
+        ellipticity: 1.008
         directivity_dbi: 54.76
         xpd_db: 44.53
         sub_spillover: 0.013964
@@ -53,7 +53,7 @@ horns:
         color: "indigo"
         fwhm_x_deg: 0.347
         fwhm_y_deg: 0.345
-        ellipticity: 1.006,
+        ellipticity: 1.006
         directivity_dbi: 54.75
         xpd_db: 43.93
         sub_spillover: 0.013704
@@ -70,7 +70,7 @@ horns:
         color: "indigo"
         fwhm_x_deg: 0.348
         fwhm_y_deg: 0.345
-        ellipticity: 1.009,
+        ellipticity: 1.009
         directivity_dbi: 54.74
         xpd_db: 44.19
         sub_spillover: 0.01397
@@ -87,7 +87,7 @@ horns:
         color: "indigo"
         fwhm_x_deg: 0.349
         fwhm_y_deg: 0.344
-        ellipticity: 1.013,
+        ellipticity: 1.013
         directivity_dbi: 54.74
         xpd_db: 44.14
         sub_spillover: 0.014094
@@ -104,7 +104,7 @@ horns:
         color: "indigo"
         fwhm_x_deg: 0.348
         fwhm_y_deg: 0.345
-        ellipticity: 1.009,
+        ellipticity: 1.009
         directivity_dbi: 54.74
         xpd_db: 44.19
         sub_spillover: 0.01397
@@ -121,7 +121,7 @@ horns:
         color: "indigo"
         fwhm_x_deg: 0.347
         fwhm_y_deg: 0.345
-        ellipticity: 1.006,
+        ellipticity: 1.006
         directivity_dbi: 54.75
         xpd_db: 43.93
         sub_spillover: 0.013704
@@ -138,7 +138,7 @@ horns:
         color: "indigo"
         fwhm_x_deg: 0.348
         fwhm_y_deg: 0.345
-        ellipticity: 1.008,
+        ellipticity: 1.008
         directivity_dbi: 54.75
         xpd_db: 44.06
         sub_spillover: 0.013562
@@ -155,7 +155,7 @@ horns:
         color: "yellow"
         fwhm_x_deg: 0.348
         fwhm_y_deg: 0.345
-        ellipticity: 1.009,
+        ellipticity: 1.009
         directivity_dbi: 54.73
         xpd_db: 41.47
         sub_spillover: 0.013383
@@ -172,7 +172,7 @@ horns:
         color: "yellow"
         fwhm_x_deg: 0.349
         fwhm_y_deg: 0.346
-        ellipticity: 1.009,
+        ellipticity: 1.009
         directivity_dbi: 54.69
         xpd_db: 41.00
         sub_spillover: 0.01296
@@ -189,7 +189,7 @@ horns:
         color: "yellow"
         fwhm_x_deg: 0.348
         fwhm_y_deg: 0.346
-        ellipticity: 1.004,
+        ellipticity: 1.004
         directivity_dbi: 54.71
         xpd_db: 41.45
         sub_spillover: 0.013402
@@ -206,7 +206,7 @@ horns:
         color: "yellow"
         fwhm_x_deg: 0.348
         fwhm_y_deg: 0.345
-        ellipticity: 1.008,
+        ellipticity: 1.008
         directivity_dbi: 54.72
         xpd_db: 41.93
         sub_spillover: 0.013783
@@ -223,7 +223,7 @@ horns:
         color: "yellow"
         fwhm_x_deg: 0.348
         fwhm_y_deg: 0.345
-        ellipticity: 1.008,
+        ellipticity: 1.008
         directivity_dbi: 54.73
         xpd_db: 41.98
         sub_spillover: 0.013652
@@ -240,7 +240,7 @@ horns:
         color: "yellow"
         fwhm_x_deg: 0.349
         fwhm_y_deg: 0.345
-        ellipticity: 1.010,
+        ellipticity: 1.010
         directivity_dbi: 54.71
         xpd_db: 41.49
         sub_spillover: 0.013154
@@ -257,7 +257,7 @@ horns:
         color: "yellow"
         fwhm_x_deg: 0.350
         fwhm_y_deg: 0.345
-        ellipticity: 1.013,
+        ellipticity: 1.013
         directivity_dbi: 54.69
         xpd_db: 40.89
         sub_spillover: 0.012843
@@ -274,7 +274,7 @@ horns:
         color: "orange"
         fwhm_x_deg: 0.345
         fwhm_y_deg: 0.348
-        ellipticity: 1.008,
+        ellipticity: 1.008
         directivity_dbi: 54.73
         xpd_db: 42.70
         sub_spillover: 0.013773
@@ -291,7 +291,7 @@ horns:
         color: "orange"
         fwhm_x_deg: 0.347
         fwhm_y_deg: 0.349
-        ellipticity: 1.006,
+        ellipticity: 1.006
         directivity_dbi: 54.69
         xpd_db: 42.17
         sub_spillover: 0.013305
@@ -308,7 +308,7 @@ horns:
         color: "orange"
         fwhm_x_deg: 0.350
         fwhm_y_deg: 0.345
-        ellipticity: 1.014,
+        ellipticity: 1.014
         directivity_dbi: 54.69
         xpd_db: 42.56
         sub_spillover: 0.013495
@@ -325,7 +325,7 @@ horns:
         color: "orange"
         fwhm_x_deg: 0.350
         fwhm_y_deg: 0.345
-        ellipticity: 1.014,
+        ellipticity: 1.014
         directivity_dbi: 54.70
         xpd_db: 42.46
         sub_spillover: 0.013865
@@ -342,7 +342,7 @@ horns:
         color: "orange"
         fwhm_x_deg: 0.348
         fwhm_y_deg: 0.346
-        ellipticity: 1.007,
+        ellipticity: 1.007
         directivity_dbi: 54.72
         xpd_db: 42.97
         sub_spillover: 0.014065
@@ -359,7 +359,7 @@ horns:
         color: "orange"
         fwhm_x_deg: 0.347
         fwhm_y_deg: 0.346
-        ellipticity: 1.003,
+        ellipticity: 1.003
         directivity_dbi: 54.73
         xpd_db: 42.83
         sub_spillover: 0.013801
@@ -376,7 +376,7 @@ horns:
         color: "orange"
         fwhm_x_deg: 0.348
         fwhm_y_deg: 0.346
-        ellipticity: 1.003,
+        ellipticity: 1.003
         directivity_dbi: 54.71
         xpd_db: 42.30
         sub_spillover: 0.013417
@@ -393,7 +393,7 @@ horns:
         color: "red"
         fwhm_x_deg: 0.352
         fwhm_y_deg: 0.343
-        ellipticity: 1.025,
+        ellipticity: 1.025
         directivity_dbi: 54.71
         xpd_db: 41.44
         sub_spillover: 0.014177
@@ -410,7 +410,7 @@ horns:
         color: "red"
         fwhm_x_deg: 0.351
         fwhm_y_deg: 0.344
-        ellipticity: 1.020,
+        ellipticity: 1.020
         directivity_dbi: 54.69
         xpd_db: 41.61
         sub_spillover: 0.013937
@@ -427,7 +427,7 @@ horns:
         color: "red"
         fwhm_x_deg: 0.354
         fwhm_y_deg: 0.344
-        ellipticity: 1.030,
+        ellipticity: 1.030
         directivity_dbi: 54.66
         xpd_db: 40.99
         sub_spillover: 0.01381
@@ -444,7 +444,7 @@ horns:
         color: "red"
         fwhm_x_deg: 0.355
         fwhm_y_deg: 0.343
-        ellipticity: 1.034,
+        ellipticity: 1.034
         directivity_dbi: 54.66
         xpd_db: 40.85
         sub_spillover: 0.013881
@@ -461,7 +461,7 @@ horns:
         color: "red"
         fwhm_x_deg: 0.353
         fwhm_y_deg: 0.344
-        ellipticity: 1.027,
+        ellipticity: 1.027
         directivity_dbi: 54.69
         xpd_db: 41.32
         sub_spillover: 0.014136
@@ -478,7 +478,7 @@ horns:
         color: "red"
         fwhm_x_deg: 0.351
         fwhm_y_deg: 0.344
-        ellipticity: 1.020,
+        ellipticity: 1.020
         directivity_dbi: 54.71
         xpd_db: 41.98
         sub_spillover: 0.014259
@@ -495,7 +495,7 @@ horns:
         color: "red"
         fwhm_x_deg: 0.350
         fwhm_y_deg: 0.344
-        ellipticity: 1.018,
+        ellipticity: 1.018
         directivity_dbi: 54.72
         xpd_db: 42.07
         sub_spillover: 0.014129
