@@ -1,884 +1,195 @@
 ---
 polarimeters:
     - id: 1
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP01"
 
     - id: 2
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP02"
+      center_frequency_hz: 43.35e9
+      bandwidth_hz: 7.15e9
 
     - id: 3
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP03"
 
     - id: 4
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP04"
 
     - id: 5
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP05"
 
     - id: 6
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP06"
 
     - id: 7
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP07"
 
     - id: 8
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP08"
 
     - id: 9
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP09"
 
     - id: 10
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP10"
 
     - id: 11
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP11"
 
     - id: 12
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP12"
 
     - id: 13
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP13"
 
     - id: 14
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP14"
 
     - id: 15
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP15"
 
     - id: 16
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP16"
 
     - id: 17
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP17"
 
     - id: 18
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP18"
 
     - id: 19
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP19"
 
     - id: 20
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP20"
 
     - id: 21
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP21"
 
     - id: 22
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP22"
 
     - id: 23
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP23"
 
     - id: 24
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP24"
 
     - id: 25
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP25"
 
     - id: 26
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP26"
 
     - id: 27
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP27"
 
     - id: 28
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP28"
 
     - id: 29
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP29"
 
     - id: 30
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP30"
 
     - id: 31
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP31"
 
     - id: 32
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP32"
 
     - id: 33
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP33"
+      alpha_i: 0.784
+      alpha_q: 1.426
+      alpha_u: 0.260
+      fknee_q_hz: 65e-3
+      fknee_u_hz: 62e-3
+      wn_q_k2_hz: 1.31e-6
+      wn_u_k2_hz: 1.22e-6
 
     - id: 34
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP34"
 
     - id: 35
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP35"
 
     - id: 36
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP36"
 
     - id: 37
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP37"
 
     - id: 38
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP38"
 
     - id: 39
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP39"
 
     - id: 40
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP40"
 
     - id: 41
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP41"
 
     - id: 42
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP42"
 
     - id: 43
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP43"
 
     - id: 44
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP44"
 
     - id: 45
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP45"
 
     - id: 46
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP46"
 
     - id: 47
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP47"
 
     - id: 48
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP48"
 
     - id: 49
-      det_q1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_q2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u1:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
-      det_u2:
-          fknee_hz: 10
-          alpha: 2.0
-          wn_sigma_k: 1.0
+      name: "STRIP49"
+
+    - id: 50
+      name: "STRIP50"
+
+    - id: 51
+      name: "STRIP51"
+
+    - id: 52
+      name: "STRIP52"
+
+    - id: 53
+      name: "STRIP53"
+
+    - id: 54
+      name: "STRIP54"
+
+    - id: 55
+      name: "STRIP55"
+
+    - id: 56
+      name: "STRIP56"
+
+    - id: 57
+      name: "STRIP57"
+
+    - id: 58
+      name: "STRIP58"
+      alpha_i: 1.11725
+      alpha_q: 1.181
+      alpha_u: 0.475
+      fknee_q_hz: 0.148
+      fknee_u_hz: 0.053
+      wn_q_k2_hz: 0.93e-6
+      wn_u_k2_hz: 0.75e-6
+
+    - id: 59
+      name: "STRIP59"
 ...
