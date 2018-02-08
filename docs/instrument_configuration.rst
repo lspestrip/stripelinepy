@@ -25,7 +25,7 @@ Polarimeters
 ------------
 
 The file `strip_detectors.yaml
-<https://github.com/lspestrip/stripeline/instrument/strip_detectors.yaml>`_
+<https://github.com/lspestrip/stripeline/tree/master/instrument/strip_detectors.yaml>`_
 contains the parameters that quantify the noise properties of each STRIP
 polarimeter. It has one key, ``polarimeters``, which is a list of dictionaries.
 Each dictionary refers to one polarimeter. The order *is not significant*, as
@@ -63,7 +63,7 @@ Focal plane
 -----------
 
 The file `strip_focal_plane.yaml
-<https://github.com/lspestrip/stripeline/instrument/strip_focal_plane.yaml>`_
+<https://github.com/lspestrip/stripeline/tree/master/instrument/strip_focal_plane.yaml>`_
 contains the geometry of the focal plane, i.e., the orientation of the 49 horns.
 Each orientation is a 3D vector of length one which points toward the point on
 the sky sphere where the centre of the main beam is located. The boresight
@@ -176,6 +176,6 @@ Scanning strategy
 
 The details of the scanning strategy are stored in the YAML file
 `scanning_strategy.yaml
-<https://github.com/lspestrip/stripeline/instrument/scanning_strategy.yaml>`_.
+<https://github.com/lspestrip/stripeline/tree/master/instrument/scanning_strategy.yaml>`_.
 See the section :ref:`scanning-the-sky` for more information about how to use
 this file to produce timelines.
